@@ -62,6 +62,10 @@ model User {
     accounts      Account[]
     sessions      Session[]
     posts         Post[]
+    createdOkrTerms OkrTerm[]
+    createdOkrNodes OkrNode[]
+    createdObjectives Objective[]
+    createdKeyResults KeyResult[]
 }
 
 model VerificationToken {
@@ -70,4 +74,57 @@ model VerificationToken {
     expires    DateTime
 
     @@unique([identifier, token])
+}
+
+model OkrTerm {
+    id          String @id
+    name        String
+    createdById String
+    createdBy   User   @relation(fields: [createdById], references: [id])
+    startDate   DateTime
+    endDate     DateTime
+    okrNodes    OkrNode[]
+    objectives  Objective[]
+    keyResults  KeyResult[]
+}
+
+model OkrNode {
+    id            String @id
+    okrTermId     String
+    okrTerm       OkrTerm @relation(fields: [okrTermId], references: [id])
+    objectiveId   String
+    objective     Objective?
+    keyResultId   String
+    keyResult     KeyResult?
+    createdById   String
+    createdBy     User   @relation(fields: [createdById], references: [id])
+}
+
+model Objective {
+    id          String @id
+    name        String
+    createdById String
+    createdBy   User   @relation(fields: [createdById], references: [id])
+    okrTermId   String
+    okrTerm     OkrTerm @relation(fields: [okrTermId], references: [id])
+    keyResults  KeyResult[]
+    okrNodeId   String @unique
+    okrNode     OkrNode @relation(fields: [okrNodeId], references: [id])
+}
+
+model KeyResult {
+    id           String @id
+    name         String
+    okrTermId    String
+    okrTerm      OkrTerm @relation(fields: [okrTermId], references: [id])
+    objectiveId  String @unique
+    objective    Objective @relation(fields: [objectiveId], references: [id])
+    createdById  String
+    createdBy    User   @relation(fields: [createdById], references: [id])
+    targetValue  Int
+    unit         String
+    currentValue Int
+    confidence   Int
+    okrNodeId   String @unique
+    okrNode     OkrNode @relation(fields: [okrNodeId], references: [id])
 }
