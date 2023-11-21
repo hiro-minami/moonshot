@@ -13,6 +13,6 @@ jobs:
           with:
             node-version: 20
 
-        - run: pnpm install
+        - run: npm install
         - name: Lint
-          run: pnpm run lint
+          run: npm run lint
