@@ -51,7 +51,7 @@ erDiagram
   
 
   "OkrTerm" {
-    String id "🗝️"
+    Int id "🗝️"
     String name 
     String createdById 
     DateTime startDate 
@@ -60,8 +60,8 @@ erDiagram
   
 
   "OkrNode" {
-    String id "🗝️"
-    String okrTermId 
+    Int id "🗝️"
+    Int okrTermId 
     String objectiveId 
     String keyResultId 
     String createdById 
@@ -69,25 +69,25 @@ erDiagram
   
 
   "Objective" {
-    String id "🗝️"
+    Int id "🗝️"
     String name 
     String createdById 
-    String okrTermId 
-    String okrNodeId 
+    Int okrTermId 
+    Int okrNodeId 
     }
   
 
   "KeyResult" {
-    String id "🗝️"
+    Int id "🗝️"
     String name 
-    String okrTermId 
-    String objectiveId 
+    Int okrTermId 
+    Int objectiveId 
     String createdById 
     Int targetValue 
     String unit 
     Int currentValue 
     Int confidence 
-    String okrNodeId 
+    Int okrNodeId 
     }
   
     "Post" o|--|| "User" : "createdBy"

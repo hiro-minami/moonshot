@@ -84,7 +84,7 @@ model VerificationToken {
 }
 
 model OkrTerm {
-    id          String @id
+    id          Int      @id @default(autoincrement())
     name        String
     createdById String
     createdBy   User   @relation(fields: [createdById], references: [id])
@@ -96,8 +96,8 @@ model OkrTerm {
 }
 
 model OkrNode {
-    id            String @id
-    okrTermId     String
+    id            Int      @id @default(autoincrement())
+    okrTermId     Int
     okrTerm       OkrTerm @relation(fields: [okrTermId], references: [id])
     objectiveId   String
     objective     Objective?
@@ -108,23 +108,23 @@ model OkrNode {
 }
 
 model Objective {
-    id          String @id
+    id          Int      @id @default(autoincrement())
     name        String
     createdById String
     createdBy   User   @relation(fields: [createdById], references: [id])
-    okrTermId   String
+    okrTermId   Int
     okrTerm     OkrTerm @relation(fields: [okrTermId], references: [id])
     keyResults  KeyResult[]
-    okrNodeId   String @unique
+    okrNodeId   Int @unique
     okrNode     OkrNode @relation(fields: [okrNodeId], references: [id])
 }
 
 model KeyResult {
-    id           String @id
+    id           Int      @id @default(autoincrement())
     name         String
-    okrTermId    String
+    okrTermId    Int
     okrTerm      OkrTerm @relation(fields: [okrTermId], references: [id])
-    objectiveId  String @unique
+    objectiveId  Int @unique
     objective    Objective @relation(fields: [objectiveId], references: [id])
     createdById  String
     createdBy    User   @relation(fields: [createdById], references: [id])
@@ -132,6 +132,6 @@ model KeyResult {
     unit         String
     currentValue Int
     confidence   Int
-    okrNodeId   String @unique
-    okrNode     OkrNode @relation(fields: [okrNodeId], references: [id])
+    okrNodeId    Int @unique
+    okrNode      OkrNode @relation(fields: [okrNodeId], references: [id])
 }
