@@ -12,7 +12,9 @@ jobs:
           uses: actions/setup-node@v3
           with:
             node-version: 20
-        - name: Setup
-          run: npm install | cp .env.example .env
+        - name: Setup npm
+          run: npm install
+        - name: Copy dotenv
+          run: cp .env.example .env
         - name: Lint
           run: npm run lint
