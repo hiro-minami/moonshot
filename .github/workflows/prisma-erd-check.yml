@@ -7,15 +7,15 @@ jobs:
     build:
         runs-on: ubuntu-latest
         steps:
-        - uses: actions/checkout@v3
+        - uses: actions/checkout@v4
         - name: Setup Node
           uses: actions/setup-node@v3
           with:
             node-version: 20
-        - run: npm install
+        - run: pnpm install
         - name: create ERD
           run: |
-            npm run erd
+            pnpm run erd
         - id: checkErdDiff
           run: echo "changed=$(git diff --name-only prisma/ERD.md)" >> $GITHUB_OUTPUT
         - run: echo ${{ steps.checkErdDiff.outputs.changed}}
