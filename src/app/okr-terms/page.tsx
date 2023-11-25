@@ -4,14 +4,13 @@ import { PageContent } from "./page-content";
 
 const OkrTerms = async () => {
   const session = await getServerAuthSession();
-  console.log(session);
   if (!session?.user) return null;
 
   const okrTerms = await api.okrTerm.getOkrTerms.query();
 
   return (
     <div className="p-12">
-      <PageContent okrTerms={okrTerms} />
+      <PageContent okrTerms={okrTerms} createdById={session.user.id} />
     </div>
   );
 };
