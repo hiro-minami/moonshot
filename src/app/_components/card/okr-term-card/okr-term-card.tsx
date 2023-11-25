@@ -2,11 +2,13 @@ import { Card, Flex, Avatar, Box, Text } from "@radix-ui/themes";
 
 type OkrTermCardProps = {
   name: string;
-  startDate: string;
-  endDate: string;
+  startDate: Date;
+  endDate: Date;
 };
 
 export const OkrTermCard = ({ name, startDate, endDate }: OkrTermCardProps) => {
+  const formatDate = (date: Date) => date.toISOString().split("T")[0];
+
   return (
     <Card className="w-[100%]">
       <Flex gap="3" align="center">
@@ -21,7 +23,7 @@ export const OkrTermCard = ({ name, startDate, endDate }: OkrTermCardProps) => {
             {name}
           </Text>
           <Text as="div" size="2" weight="bold">
-            {startDate} ~ {endDate}
+            {formatDate(startDate)} ~ {formatDate(endDate)}
           </Text>
         </Box>
       </Flex>
