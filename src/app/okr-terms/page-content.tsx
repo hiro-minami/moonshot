@@ -30,6 +30,7 @@ export const PageContent = ({ okrTerms, createdById }: Props) => {
             {okrTerms.map((okrTerm) => (
               <OkrTermCard
                 key={okrTerm.id}
+                id={okrTerm.id}
                 name={okrTerm.name}
                 startDate={okrTerm.startDate}
                 endDate={okrTerm.endDate}
