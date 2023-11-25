@@ -2,45 +2,42 @@
 
 import { ScrollArea } from "@radix-ui/themes";
 import type { OkrTerm } from "@prisma/client";
-import { createOkrTermMock } from "../_testdata/okr-term";
 import { OkrTermCreateModal } from "../_components/modal/okr-term-create-modal";
 import { OkrTermCard } from "../_components/card/okr-term-card";
+import { OkrTermCreateForm } from "../_components/form/okr-term-create-form";
 
 type Props = {
   okrTerms: OkrTerm[];
+  createdById: string;
 };
 
-export const PageContent = ({ okrTerms }: Props) => {
-  const mockOkrTerms = createOkrTermMock();
+export const PageContent = ({ okrTerms, createdById }: Props) => {
   return (
     <>
       <div className="align-center flex justify-between">
         <span className="ml-6 text-[32px] font-bold">OKR期間</span>
-        <OkrTermCreateModal />
+        <OkrTermCreateModal>
+          <OkrTermCreateForm createdById={createdById} />
+        </OkrTermCreateModal>
       </div>
       <ScrollArea
         type="always"
         scrollbars="vertical"
         className="mt-8 h-[560px] px-6"
       >
-        {okrTerms.length > 0 && (
-          <div>
-            {okrTerms.map((okrTerm) => (
-              <div key={okrTerm.id}>{okrTerm.name}</div>
-            ))}
-          </div>
-        )}
-        {okrTerms.length <= 0 && (
+        {okrTerms.length > 0 ? (
           <div className="flex flex-col gap-4 pt-4">
-            {mockOkrTerms.map((okrTerm) => (
+            {okrTerms.map((okrTerm) => (
               <OkrTermCard
                 key={okrTerm.id}
                 name={okrTerm.name}
-                startDate={okrTerm.startDate ?? ""}
-                endDate={okrTerm.endDate ?? ""}
+                startDate={okrTerm.startDate}
+                endDate={okrTerm.endDate}
               />
             ))}
           </div>
+        ) : (
+          <div className="flex flex-col gap-4 pt-4">no Okr Terms</div>
         )}
       </ScrollArea>
     </>
