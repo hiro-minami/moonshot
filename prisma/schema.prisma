@@ -3,6 +3,7 @@
 
 generator client {
     provider = "prisma-client-js"
+    binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
 }
 
 generator erd {
@@ -70,7 +71,6 @@ model User {
     sessions      Session[]
     posts         Post[]
     createdOkrTerms OkrTerm[]
-    createdOkrNodes OkrNode[]
     createdObjectives Objective[]
     createdKeyResults KeyResult[]
 }
@@ -90,33 +90,19 @@ model OkrTerm {
     createdBy   User   @relation(fields: [createdById], references: [id])
     startDate   DateTime
     endDate     DateTime
-    okrNodes    OkrNode[]
     objectives  Objective[]
     keyResults  KeyResult[]
-}
-
-model OkrNode {
-    id            Int      @id @default(autoincrement())
-    okrTermId     Int
-    okrTerm       OkrTerm @relation(fields: [okrTermId], references: [id])
-    objectiveId   String
-    objective     Objective?
-    keyResultId   String
-    keyResult     KeyResult?
-    createdById   String
-    createdBy     User   @relation(fields: [createdById], references: [id])
 }
 
 model Objective {
     id          Int      @id @default(autoincrement())
     name        String
+    description String
     createdById String
     createdBy   User   @relation(fields: [createdById], references: [id])
     okrTermId   Int
     okrTerm     OkrTerm @relation(fields: [okrTermId], references: [id])
     keyResults  KeyResult[]
-    okrNodeId   Int @unique
-    okrNode     OkrNode @relation(fields: [okrNodeId], references: [id])
 }
 
 model KeyResult {
@@ -132,6 +118,4 @@ model KeyResult {
     unit         String
     currentValue Int
     confidence   Int
-    okrNodeId    Int @unique
-    okrNode      OkrNode @relation(fields: [okrNodeId], references: [id])
 }

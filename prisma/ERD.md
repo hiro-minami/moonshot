@@ -59,21 +59,12 @@ erDiagram
     }
   
 
-  "OkrNode" {
-    Int id "🗝️"
-    Int okrTermId 
-    String objectiveId 
-    String keyResultId 
-    String createdById 
-    }
-  
-
   "Objective" {
     Int id "🗝️"
     String name 
+    String description 
     String createdById 
     Int okrTermId 
-    Int okrNodeId 
     }
   
 
@@ -87,7 +78,6 @@ erDiagram
     String unit 
     Int currentValue 
     Int confidence 
-    Int okrNodeId 
     }
   
     "Post" o|--|| "User" : "createdBy"
@@ -97,23 +87,15 @@ erDiagram
     "User" o{--}o "Session" : "sessions"
     "User" o{--}o "Post" : "posts"
     "User" o{--}o "OkrTerm" : "createdOkrTerms"
-    "User" o{--}o "OkrNode" : "createdOkrNodes"
     "User" o{--}o "Objective" : "createdObjectives"
     "User" o{--}o "KeyResult" : "createdKeyResults"
     "OkrTerm" o|--|| "User" : "createdBy"
-    "OkrTerm" o{--}o "OkrNode" : "okrNodes"
     "OkrTerm" o{--}o "Objective" : "objectives"
     "OkrTerm" o{--}o "KeyResult" : "keyResults"
-    "OkrNode" o|--|| "OkrTerm" : "okrTerm"
-    "OkrNode" o{--}o "Objective" : "objective"
-    "OkrNode" o{--}o "KeyResult" : "keyResult"
-    "OkrNode" o|--|| "User" : "createdBy"
     "Objective" o|--|| "User" : "createdBy"
     "Objective" o|--|| "OkrTerm" : "okrTerm"
     "Objective" o{--}o "KeyResult" : "keyResults"
-    "Objective" o|--|| "OkrNode" : "okrNode"
     "KeyResult" o|--|| "OkrTerm" : "okrTerm"
     "KeyResult" o|--|| "Objective" : "objective"
     "KeyResult" o|--|| "User" : "createdBy"
-    "KeyResult" o|--|| "OkrNode" : "okrNode"
 ```
