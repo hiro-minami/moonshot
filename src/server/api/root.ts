@@ -1,6 +1,7 @@
 import { postRouter } from "~/server/api/routers/post";
 import { createTRPCRouter } from "~/server/api/trpc";
 import { okrTermRouter } from "./routers/okr-term";
+import { objectiveRouter } from "./routers/objective";
 
 /**
  * This is the primary router for your server.
@@ -10,6 +11,7 @@ import { okrTermRouter } from "./routers/okr-term";
 export const appRouter = createTRPCRouter({
   post: postRouter,
   okrTerm: okrTermRouter,
+  objective: objectiveRouter,
 });
 
 // export type definition of API

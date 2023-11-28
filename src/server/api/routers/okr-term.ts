@@ -52,4 +52,19 @@ export const okrTermRouter = createTRPCRouter({
       orderBy: { id: "asc" },
     });
   }),
+  getCurrentOkrTerm: publicProcedure.query(async ({ ctx }) => {
+    const today = new Date();
+    return ctx.db.okrTerm.findFirst({
+      where: {
+        AND: {
+          startDate: {
+            lte: today,
+          },
+          endDate: {
+            gte: today,
+          },
+        },
+      },
+    });
+  }),
 });
