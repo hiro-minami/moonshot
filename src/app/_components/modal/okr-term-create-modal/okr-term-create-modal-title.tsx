@@ -3,7 +3,7 @@
 import { Cross2Icon } from "@radix-ui/react-icons";
 import { Button, Dialog } from "@radix-ui/themes";
 
-export const OkrCreateModalTitle = () => {
+export const OkrTermCreateModalTitle = () => {
   return (
     <div className="flex flex-row justify-between">
       <span>OKR期間の作成</span>

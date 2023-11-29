@@ -1,5 +1,5 @@
-import { OkrCreateModalFooter } from "../../modal/okr-term-create-modal/okr-create-modal-footer";
-import { useOkrTermForm } from "./useForm";
+import { OkrTermCreateModalFooter } from "../../modal/okr-term-create-modal";
+import { useOkrTermForm } from "./use-form";
 
 type OkrTermCreateFormProps = {
   createdById: string;
@@ -43,7 +43,7 @@ export const OkrTermCreateForm = ({ createdById }: OkrTermCreateFormProps) => {
           </div>
         </fieldset>
       </div>
-      <OkrCreateModalFooter />
+      <OkrTermCreateModalFooter />
     </form>
   );
 };
