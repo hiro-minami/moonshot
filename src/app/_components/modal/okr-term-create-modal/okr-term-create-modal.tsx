@@ -1,7 +1,7 @@
 "use client";
 
 import { Button, Dialog } from "@radix-ui/themes";
-import { OkrCreateModalTitle } from "./okr-create-modal-title";
+import { OkrTermCreateModalTitle } from ".";
 
 type OkrTermCreateModalProps = {
   children: React.ReactNode;
@@ -17,7 +17,7 @@ export const OkrTermCreateModal = ({ children }: OkrTermCreateModalProps) => {
       </Dialog.Trigger>
       <Dialog.Content>
         <Dialog.Title>
-          <OkrCreateModalTitle />
+          <OkrTermCreateModalTitle />
         </Dialog.Title>
         {children}
       </Dialog.Content>
