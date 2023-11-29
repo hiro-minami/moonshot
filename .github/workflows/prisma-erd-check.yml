@@ -1,25 +1,27 @@
 name: Prisma ERD Check
 
 on:
-    pull_request:
+  pull_request:
 
 jobs:
-    build:
-        runs-on: ubuntu-latest
-        steps:
-        - uses: actions/checkout@v4
-        - name: Setup Node
-          uses: actions/setup-node@v3
-          with:
-            node-version: 20
-        - run: npm install
-        - name: create ERD
-          run: |
-            npm run erd
-        - id: checkErdDiff
-          run: echo "changed=$(git diff --name-only prisma/ERD.md)" >> $GITHUB_OUTPUT
-        - run: echo ${{ steps.checkErdDiff.outputs.changed}}
-        - if: ${{ steps.checkErdDiff.outputs.changed != '' }}
-          run: |
-            echo "ERD.md has changed.Please update ERD.md and commit it."
-            exit 1
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - run: npm install
+      - name: Copy dotenv
+        run: cp .env.example .env
+      - name: create ERD
+        run: |
+          npm run erd
+      - id: checkErdDiff
+        run: echo "changed=$(git diff --name-only prisma/ERD.md)" >> $GITHUB_OUTPUT
+      - run: echo ${{ steps.checkErdDiff.outputs.changed}}
+      - if: ${{ steps.checkErdDiff.outputs.changed != '' }}
+        run: |
+          echo "ERD.md has changed.Please update ERD.md and commit it."
+          exit 1
