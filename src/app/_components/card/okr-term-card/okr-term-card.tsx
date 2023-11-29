@@ -48,7 +48,10 @@ export const OkrTermCard = ({
             </Text>
           </Box>
         </div>
-        <Button className="bg-[#9f53ec]" onClick={deleteOkrTerm}>
+        <Button
+          className="bg-[#9f53ec] hover:bg-[#9f53ec]/80"
+          onClick={deleteOkrTerm}
+        >
           削除
         </Button>
       </div>

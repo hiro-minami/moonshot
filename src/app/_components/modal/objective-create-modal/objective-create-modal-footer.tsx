@@ -2,7 +2,7 @@
 
 import { Button, Dialog } from "@radix-ui/themes";
 
-export const OkrTermCreateModalFooter = () => {
+export const ObjectiveCreateModalFooter = () => {
   return (
     <div className="mt-4 flex flex-row justify-end gap-4">
       <Dialog.Close>

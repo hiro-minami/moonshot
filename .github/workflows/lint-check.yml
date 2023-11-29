@@ -1,20 +1,20 @@
 name: Lint Test
 
 on:
-    pull_request:
+  pull_request:
 
 jobs:
-    build:
-        runs-on: ubuntu-latest
-        steps:
-        - uses: actions/checkout@v4
-        - name: Setup Node
-          uses: actions/setup-node@v3
-          with:
-            node-version: 20
-        - name: Setup npm
-          run: npm install
-        - name: Copy dotenv
-          run: cp .env.example .env
-        - name: Lint
-          run: npm run lint
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - name: Copy dotenv
+        run: cp .env.example .env
+      - name: Setup npm
+        run: npm install
+      - name: Lint
+        run: npm run lint

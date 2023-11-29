@@ -1,23 +1,23 @@
 "use client";
 
 import { Button, Dialog } from "@radix-ui/themes";
-import { OkrTermCreateModalTitle } from ".";
+import { ObjectiveCreateModalTitle } from "./objective-create-modal-title";
 
 type OkrTermCreateModalProps = {
   children: React.ReactNode;
 };
 
-export const OkrTermCreateModal = ({ children }: OkrTermCreateModalProps) => {
+export const ObjectiveCreateModal = ({ children }: OkrTermCreateModalProps) => {
   return (
     <Dialog.Root>
       <Dialog.Trigger>
         <Button className="bg-[#9f53ec] p-5 hover:bg-[#9f53ec]/80">
-          <span className="font-bold">OKR期間を作成する</span>
+          <span className="font-bold">OKRを作成する</span>
         </Button>
       </Dialog.Trigger>
       <Dialog.Content>
         <Dialog.Title>
-          <OkrTermCreateModalTitle />
+          <ObjectiveCreateModalTitle />
         </Dialog.Title>
         {children}
       </Dialog.Content>
