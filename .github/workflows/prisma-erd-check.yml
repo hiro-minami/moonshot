@@ -8,13 +8,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Copy dotenv
+        run: cp .env.example .env
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: 20
       - run: npm install
-      - name: Copy dotenv
-        run: cp .env.example .env
       - name: create ERD
         run: |
           npm run erd
