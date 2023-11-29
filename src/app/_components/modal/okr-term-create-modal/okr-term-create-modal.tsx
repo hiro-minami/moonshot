@@ -11,7 +11,7 @@ export const OkrTermCreateModal = ({ children }: OkrTermCreateModalProps) => {
   return (
     <Dialog.Root>
       <Dialog.Trigger>
-        <Button className="bg-[#9f53ec] p-5">
+        <Button className="bg-[#9f53ec] p-5 hover:bg-[#9f53ec]/80">
           <span className="font-bold">OKR期間を作成する</span>
         </Button>
       </Dialog.Trigger>
