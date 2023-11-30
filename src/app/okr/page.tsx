@@ -14,13 +14,25 @@ const Okr = async () => {
   const objective = await api.objective.getObjective.query({
     okrTerm: okrTerm.id,
   });
+  if (!objective) return null;
+
+  const keyResults = await api.keyResult.getKeyResults.query({
+    createdById: session.user.id,
+    okrTermId: okrTerm.id,
+    objectiveId: objective.id,
+  });
+  if (!keyResults) return null;
 
   if (!objective)
     return <PleaseOkrCreateContent createdById={session.user.id} />;
 
   return (
     <div className="p-12">
-      <PageContent objective={objective} createdById={session.user.id} />
+      <PageContent
+        objective={objective}
+        keyResults={keyResults}
+        createdById={session.user.id}
+      />
     </div>
   );
 };
