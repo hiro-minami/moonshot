@@ -114,5 +114,4 @@ model KeyResult {
     targetValue  Int
     unit         String
     currentValue Int
-    confidence   Int
 }

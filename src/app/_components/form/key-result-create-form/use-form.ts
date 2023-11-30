@@ -5,12 +5,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { api } from "~/trpc/react";
 import { useRouter } from "next/navigation";
 
-export const useObjectiveForm = (createdById: string) => {
+export const useKeyResultForm = (createdById: string, objectiveId: number) => {
   const router = useRouter();
 
   const formSchema = z.object({
     name: z.string().min(1, { message: "Name is required" }),
-    description: z.string().min(1, { message: "Description is required" }),
+    targetValue: z.number(),
+    unit: z.string(),
   });
 
   type FormSchema = z.infer<typeof formSchema>;
@@ -25,7 +26,7 @@ export const useObjectiveForm = (createdById: string) => {
 
   const currentOkrTerm = api.okrTerm.getCurrentOkrTerm.useQuery();
 
-  const createObjective = api.objective.createObjective.useMutation({
+  const createKeyResult = api.keyResult.createKeyResult.useMutation({
     onSuccess: () => {
       router.refresh();
     },
@@ -33,12 +34,15 @@ export const useObjectiveForm = (createdById: string) => {
 
   const onSubmit: SubmitHandler<FormSchema> = (data) => {
     if (!currentOkrTerm.data) throw new Error("No current OKR term");
+    console.log(data);
 
-    createObjective.mutate({
+    createKeyResult.mutate({
       name: data.name,
       createdById,
-      description: data.description,
       okrTermId: currentOkrTerm.data.id,
+      objectiveId,
+      targetValue: Number(data.targetValue),
+      unit: data.unit,
     });
   };
 

@@ -11,7 +11,6 @@ export const KeyResultRouter = createTRPCRouter({
         createdById: z.string(),
         targetValue: z.number(),
         unit: z.string(),
-        confidence: z.number(),
       }),
     )
     .mutation(async ({ ctx, input }) => {
@@ -24,7 +23,6 @@ export const KeyResultRouter = createTRPCRouter({
           targetValue: input.targetValue,
           unit: input.unit,
           currentValue: 0,
-          confidence: input.confidence,
         },
       });
     }),
@@ -39,7 +37,6 @@ export const KeyResultRouter = createTRPCRouter({
         targetValue: z.number(),
         unit: z.string(),
         currentValue: z.number(),
-        confidence: z.number(),
       }),
     )
     .mutation(async ({ ctx, input }) => {
@@ -53,7 +50,6 @@ export const KeyResultRouter = createTRPCRouter({
           targetValue: input.targetValue,
           unit: input.unit,
           currentValue: input.currentValue,
-          confidence: input.confidence,
         },
       });
     }),

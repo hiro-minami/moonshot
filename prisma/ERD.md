@@ -77,7 +77,6 @@ erDiagram
     Int targetValue 
     String unit 
     Int currentValue 
-    Int confidence 
     }
   
     "Post" o|--|| "User" : "createdBy"
