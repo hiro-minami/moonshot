@@ -12,6 +12,7 @@ type PageContentProps = {
   keyResults: ReadonlyArray<KeyResult>;
 };
 
+// TODO: ObjectiveCardとKeyResultCardをtreeのように表示する
 export const PageContent = ({
   createdById,
   objective,
@@ -24,6 +25,7 @@ export const PageContent = ({
     <>
       <div className="align-center flex justify-between">
         <span className="ml-6 text-[32px] font-bold">OKR</span>
+        {/* TODO: チェックインモーダルをここに配置するようにする */}
         <KeyResultCreateModal>
           <KeyResultCreateForm
             createdById={createdById}
@@ -35,7 +37,7 @@ export const PageContent = ({
       <div className="flex flex-col gap-4 pt-4">
         <ObjectiveCard id={objective.id} name={objective.name} />
       </div>
-      <div className="flex flex-col gap-4 pt-4">
+      <div className="flex flex-col gap-4 pl-[100px] pt-4">
         {keyResults.map((keyResult, i) => (
           <KeyResultCard
             key={keyResult.id}
