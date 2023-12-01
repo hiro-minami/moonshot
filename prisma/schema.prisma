@@ -102,6 +102,7 @@ model Objective {
     keyResults  KeyResult[]
 }
 
+// TODO: ObjectiveとKeyResultは1対多の関係にするため、objectiveIdフィールドから@uniqueディレクティブを削除する
 model KeyResult {
     id           Int      @id @default(autoincrement())
     name         String
