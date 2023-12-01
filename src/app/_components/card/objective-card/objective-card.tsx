@@ -9,6 +9,7 @@ type ObjectiveCardProps = {
   name: string;
 };
 
+// TODO: 削除ボタンは、Objectiveに紐づくKeyResultがない場合のみ表示する
 export const ObjectiveCard = ({ id, name }: ObjectiveCardProps) => {
   const router = useRouter();
 
