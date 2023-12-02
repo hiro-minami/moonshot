@@ -102,13 +102,12 @@ model Objective {
     keyResults  KeyResult[]
 }
 
-// TODO: ObjectiveとKeyResultは1対多の関係にするため、objectiveIdフィールドから@uniqueディレクティブを削除する
 model KeyResult {
     id           Int      @id @default(autoincrement())
     name         String
     okrTermId    Int
     okrTerm      OkrTerm @relation(fields: [okrTermId], references: [id])
-    objectiveId  Int @unique
+    objectiveId  Int
     objective    Objective @relation(fields: [objectiveId], references: [id])
     createdById  String
     createdBy    User   @relation(fields: [createdById], references: [id])
