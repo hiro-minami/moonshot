@@ -1,8 +1,9 @@
 import { RocketIcon } from "@radix-ui/react-icons";
-import { Card, Box, Text, Button } from "@radix-ui/themes";
+import { Card, Box, Text } from "@radix-ui/themes";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import { api } from "~/trpc/react";
+import { OptionButton } from "../_components";
 
 type ObjectiveCardProps = {
   id: number;
@@ -34,12 +35,7 @@ export const ObjectiveCard = ({ id, name }: ObjectiveCardProps) => {
             </Text>
           </Box>
         </div>
-        <Button
-          className="bg-[#9f53ec] hover:bg-[#9f53ec]/80"
-          onClick={deleteOkrTerm}
-        >
-          削除
-        </Button>
+        <OptionButton onClick={deleteOkrTerm} />
       </div>
     </Card>
   );

@@ -1,8 +1,9 @@
 import { TargetIcon } from "@radix-ui/react-icons";
-import { Card, Box, Text, Button, Tooltip } from "@radix-ui/themes";
+import { Card, Box, Text, Tooltip } from "@radix-ui/themes";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import { api } from "~/trpc/react";
+import { OptionButton } from "../_components";
 
 type KeyResultCardProps = {
   id: number;
@@ -49,12 +50,7 @@ export const KeyResultCard = ({
               />
             </div>
           </Tooltip>
-          <Button
-            className="bg-[#9f53ec] hover:bg-[#9f53ec]/80"
-            onClick={deleteKeyResult}
-          >
-            削除
-          </Button>
+          <OptionButton onClick={deleteKeyResult} />
         </div>
       </div>
     </Card>
