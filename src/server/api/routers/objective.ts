@@ -45,6 +45,9 @@ export const objectiveRouter = createTRPCRouter({
   deleteObjective: publicProcedure
     .input(z.object({ id: z.number() }))
     .mutation(async ({ ctx, input }) => {
+      await ctx.db.keyResult.deleteMany({
+        where: { objectiveId: input.id },
+      });
       return ctx.db.objective.delete({ where: { id: input.id } });
     }),
   getObjective: publicProcedure
