@@ -1,7 +1,9 @@
-import { Card, Avatar, Box, Text, Button } from "@radix-ui/themes";
+import { Card, Avatar, Box, Text } from "@radix-ui/themes";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import { api } from "~/trpc/react";
+import { OptionButton } from "../_components";
+import Link from "next/link";
 
 type OkrTermCardProps = {
   id: number;
@@ -29,6 +31,7 @@ export const OkrTermCard = ({
     mutate({ id });
   }, [id, mutate]);
 
+  // TODO: OKR期間を押下すると、それぞれのOKR期間の詳細ページに遷移するようにする
   return (
     <Card className="w-[100%]">
       <div className="flex flex-row items-center justify-between">
@@ -40,20 +43,17 @@ export const OkrTermCard = ({
             fallback="T"
           />
           <Box>
-            <Text as="div" size="2" weight="bold">
-              {name}
-            </Text>
+            <Link href={`/okr`}>
+              <Text as="div" size="2" weight="bold">
+                {name}
+              </Text>
+            </Link>
             <Text as="div" size="2" weight="bold">
               {formatDate(startDate)} ~ {formatDate(endDate)}
             </Text>
           </Box>
         </div>
-        <Button
-          className="bg-[#9f53ec] hover:bg-[#9f53ec]/80"
-          onClick={deleteOkrTerm}
-        >
-          削除
-        </Button>
+        <OptionButton onClick={deleteOkrTerm} />
       </div>
     </Card>
   );
