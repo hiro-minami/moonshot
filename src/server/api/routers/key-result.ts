@@ -53,6 +53,27 @@ export const KeyResultRouter = createTRPCRouter({
         },
       });
     }),
+  checkin: publicProcedure
+    .input(
+      z.array(
+        z.object({
+          id: z.number(),
+          currentValue: z.number(),
+        }),
+      ),
+    )
+    .mutation(async ({ ctx, input }) => {
+      return ctx.db.$transaction(
+        input.map((keyResult) => {
+          return ctx.db.keyResult.update({
+            where: { id: keyResult.id },
+            data: {
+              currentValue: keyResult.currentValue,
+            },
+          });
+        }),
+      );
+    }),
   deleteKeyResult: publicProcedure
     .input(z.object({ id: z.number() }))
     .mutation(async ({ ctx, input }) => {
