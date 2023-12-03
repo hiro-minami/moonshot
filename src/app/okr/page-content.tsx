@@ -24,7 +24,7 @@ export const PageContent = ({
   return (
     <>
       <div className="align-center flex justify-between">
-        <span className="ml-6 text-[32px] font-bold">OKR</span>
+        <span className="text-[32px] font-bold">OKR</span>
         {/* TODO: チェックインモーダルをここに配置するようにする */}
         <KeyResultCreateModal>
           <KeyResultCreateForm
