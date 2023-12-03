@@ -1,5 +1,5 @@
 import { RocketIcon } from "@radix-ui/react-icons";
-import { Card, Box, Text } from "@radix-ui/themes";
+import { Card, Box, Text, Tooltip } from "@radix-ui/themes";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import { api } from "~/trpc/react";
@@ -8,10 +8,14 @@ import { OptionButton } from "../_components";
 type ObjectiveCardProps = {
   id: number;
   name: string;
+  progressRate: number;
 };
 
-// TODO: 削除ボタンは、Objectiveに紐づくKeyResultがない場合のみ表示する
-export const ObjectiveCard = ({ id, name }: ObjectiveCardProps) => {
+export const ObjectiveCard = ({
+  id,
+  name,
+  progressRate,
+}: ObjectiveCardProps) => {
   const router = useRouter();
 
   const { mutate } = api.objective.deleteObjective.useMutation({
@@ -20,7 +24,7 @@ export const ObjectiveCard = ({ id, name }: ObjectiveCardProps) => {
     },
   });
 
-  const deleteOkrTerm = useCallback(() => {
+  const deleteObjective = useCallback(() => {
     mutate({ id });
   }, [id, mutate]);
 
@@ -35,7 +39,17 @@ export const ObjectiveCard = ({ id, name }: ObjectiveCardProps) => {
             </Text>
           </Box>
         </div>
-        <OptionButton onClick={deleteOkrTerm} />
+        <div className="flex flex-row items-center gap-4">
+          <Tooltip content={`${progressRate}%`}>
+            <div className="h-2.5 w-[100px] rounded-full  bg-gray-200">
+              <div
+                className="h-full rounded-full bg-[#9f53ec]"
+                style={{ width: `${progressRate}%` }}
+              />
+            </div>
+          </Tooltip>
+          <OptionButton onClick={deleteObjective} />
+        </div>
       </div>
     </Card>
   );
