@@ -1,10 +1,10 @@
-import { useForm, useFieldArray } from "react-hook-form";
-import type { SubmitHandler } from "react-hook-form";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { api } from "~/trpc/react";
-import { useRouter } from "next/navigation";
 import type { KeyResult } from "@prisma/client";
+import { useRouter } from "next/navigation";
+import type { SubmitHandler } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
+import { z } from "zod";
+import { api } from "~/trpc/react";
 
 type UseCheckinFormProps = {
   keyResults: ReadonlyArray<KeyResult>;

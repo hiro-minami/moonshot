@@ -1,7 +1,7 @@
-import { useCheckinForm } from "./use-form";
 import type { KeyResult } from "@prisma/client";
-import { CheckinModalFooter } from "../../modal/check-in-modal/check-in-modal-footer";
 import { Text } from "@radix-ui/themes";
+import { CheckinModalFooter } from "../../modal/check-in-modal/check-in-modal-footer";
+import { useCheckinForm } from "./use-form";
 
 type KeyResultCreateFormProps = {
   keyResults: ReadonlyArray<KeyResult>;
