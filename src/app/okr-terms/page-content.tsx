@@ -1,10 +1,10 @@
 "use client";
 
-import { ScrollArea } from "@radix-ui/themes";
 import type { OkrTerm } from "@prisma/client";
-import { OkrTermCreateModal } from "../_components/modal/okr-term-create-modal";
+import { ScrollArea } from "@radix-ui/themes";
 import { OkrTermCard } from "../_components/card/okr-term-card";
 import { OkrTermCreateForm } from "../_components/form/okr-term-create-form";
+import { OkrTermCreateModal } from "../_components/modal/okr-term-create-modal";
 
 type Props = {
   okrTerms: OkrTerm[];

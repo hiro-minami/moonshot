@@ -1,5 +1,5 @@
 import { RocketIcon } from "@radix-ui/react-icons";
-import { Card, Box, Text, Tooltip } from "@radix-ui/themes";
+import { Box, Card, Text, Tooltip } from "@radix-ui/themes";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import { api } from "~/trpc/react";

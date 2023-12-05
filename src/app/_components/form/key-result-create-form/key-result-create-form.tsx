@@ -1,5 +1,5 @@
-import { useKeyResultForm } from "./use-form";
 import { KeyResultCreateModalFooter } from "../../modal/key-result-crate-modal";
+import { useKeyResultForm } from "./use-form";
 
 type KeyResultCreateFormProps = {
   createdById: string;

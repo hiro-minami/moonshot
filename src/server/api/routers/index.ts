@@ -1,3 +1,3 @@
-export * from "./okr-term";
-export * from "./objective";
 export * from "./key-result";
+export * from "./objective";
+export * from "./okr-term";
