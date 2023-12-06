@@ -26,17 +26,43 @@ export const KeyResultRouter = createTRPCRouter({
         },
       });
     }),
+  createKeyResults: publicProcedure
+    .input(
+      z.object({
+        keyResults: z.array(
+          z.object({
+            name: z.string(),
+            okrTermId: z.number(),
+            objectiveId: z.number(),
+            createdById: z.string(),
+            targetValue: z.number(),
+            unit: z.string(),
+          }),
+        ),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      return ctx.db.keyResult.createMany({
+        data: input.keyResults.map((keyResult) => {
+          return {
+            name: keyResult.name,
+            okrTermId: keyResult.okrTermId,
+            objectiveId: keyResult.objectiveId,
+            createdById: keyResult.createdById,
+            targetValue: keyResult.targetValue,
+            unit: keyResult.unit,
+            currentValue: 0,
+          };
+        }),
+      });
+    }),
   updateKeyResult: publicProcedure
     .input(
       z.object({
         id: z.number(),
         name: z.string(),
-        okrTermId: z.number(),
-        objectiveId: z.number(),
-        createdById: z.string(),
         targetValue: z.number(),
         unit: z.string(),
-        currentValue: z.number(),
       }),
     )
     .mutation(async ({ ctx, input }) => {
@@ -44,12 +70,8 @@ export const KeyResultRouter = createTRPCRouter({
         where: { id: input.id },
         data: {
           name: input.name,
-          okrTerm: { connect: { id: input.okrTermId } },
-          objective: { connect: { id: input.objectiveId } },
-          createdBy: { connect: { id: input.createdById } },
           targetValue: input.targetValue,
           unit: input.unit,
-          currentValue: input.currentValue,
         },
       });
     }),
