@@ -1,21 +1,19 @@
+import type { KeyResult } from "@prisma/client";
 import { TargetIcon } from "@radix-ui/react-icons";
-import { Card, Box, Text, Tooltip } from "@radix-ui/themes";
+import { Box, Button, Card, Text, Tooltip } from "@radix-ui/themes";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import { api } from "~/trpc/react";
+import { CheckinModal } from "../../modal/check-in-modal";
 import { OptionButton } from "../_components";
 
 type KeyResultCardProps = {
-  id: number;
-  name: string;
+  keyResult: KeyResult;
   progressRate: number;
 };
 
-// TODO: 削除ボタンはアイコンにする
-// TODO: progress barを押下すると、KeyResultの編集モーダルを表示するようにする
 export const KeyResultCard = ({
-  id,
-  name,
+  keyResult,
   progressRate,
 }: KeyResultCardProps) => {
   const router = useRouter();
@@ -27,8 +25,8 @@ export const KeyResultCard = ({
   });
 
   const deleteKeyResult = useCallback(() => {
-    mutate({ id });
-  }, [id, mutate]);
+    mutate({ id: keyResult.id });
+  }, [keyResult.id, mutate]);
 
   return (
     <Card className="w-[100%]">
@@ -37,20 +35,24 @@ export const KeyResultCard = ({
           <TargetIcon className="w-[30px]" />
           <Box>
             <Text as="div" size="2" weight="bold">
-              {name}
+              {keyResult.name}
             </Text>
           </Box>
         </div>
         <div className="flex flex-row items-center gap-4">
-          <Tooltip content={`${progressRate}%`}>
-            <div className="h-2.5 w-[100px] rounded-full  bg-gray-200">
-              <div
-                className="h-full rounded-full bg-[#9f53ec]"
-                style={{ width: `${progressRate}%` }}
-              />
-            </div>
-          </Tooltip>
-          <OptionButton onClick={deleteKeyResult} />
+          <CheckinModal keyResults={[keyResult]}>
+            <Button className="p-0">
+              <Tooltip content={`${progressRate}%`}>
+                <div className="h-2.5 w-[100px] rounded-full  bg-gray-200">
+                  <div
+                    className="h-full rounded-full bg-[#9f53ec]"
+                    style={{ width: `${progressRate}%` }}
+                  />
+                </div>
+              </Tooltip>
+            </Button>
+          </CheckinModal>
+          <OptionButton onClick={deleteKeyResult} keyResult={keyResult} />
         </div>
       </div>
     </Card>
