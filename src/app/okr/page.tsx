@@ -18,11 +18,12 @@ const Okr = async () => {
   if (!objective)
     return <PleaseOkrCreateContent createdById={session.user.id} />;
 
-  const keyResults = await api.keyResult.getKeyResults.query({
+  const keyResultsQuery = await api.keyResult.getKeyResults.query({
     createdById: session.user.id,
     okrTermId: okrTerm.id,
     objectiveId: objective.id,
   });
+  const keyResults = keyResultsQuery.sort((a, b) => a.id - b.id);
 
   return (
     <div className="p-12">
