@@ -2,11 +2,10 @@
 
 import type { KeyResult, Objective } from "@prisma/client";
 import { ObjectiveCard } from "~/app/_components/card/objective-card";
-import { KeyResultCreateModal } from "../_components/modal/key-result-crate-modal";
-import { KeyResultCreateForm } from "../_components/form/key-result-create-form";
 import { KeyResultCard } from "../_components/card/key-result-card";
+import { KeyResultCreateForm } from "../_components/form/key-result-create-form";
 import { CheckinModal } from "../_components/modal/check-in-modal";
-import { CheckinForm } from "../_components/form/check-in-form";
+import { KeyResultCreateModal } from "../_components/modal/key-result-crate-modal";
 
 type PageContentProps = {
   createdById: string;
@@ -32,9 +31,7 @@ export const PageContent = ({
       <div className="align-center flex justify-between">
         <span className="text-[32px] font-bold">OKR</span>
         {keyResults.length > 0 ? (
-          <CheckinModal>
-            <CheckinForm keyResults={keyResults} />
-          </CheckinModal>
+          <CheckinModal keyResults={keyResults} />
         ) : (
           <KeyResultCreateModal>
             <KeyResultCreateForm
@@ -56,8 +53,7 @@ export const PageContent = ({
         {keyResults.map((keyResult, i) => (
           <KeyResultCard
             key={keyResult.id}
-            id={keyResult.id}
-            name={keyResult.name}
+            keyResult={keyResult}
             progressRate={progressRateList[i]!}
           />
         ))}
