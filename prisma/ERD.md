@@ -79,6 +79,16 @@ erDiagram
     Int currentValue 
     }
   
+
+  "Task" {
+    Int id "🗝️"
+    String name 
+    Int keyResultId 
+    Boolean isDone 
+    DateTime startDate 
+    DateTime endDate 
+    }
+  
     "Post" o|--|| "User" : "createdBy"
     "Account" o|--|| "User" : "user"
     "Session" o|--|| "User" : "user"
@@ -97,4 +107,6 @@ erDiagram
     "KeyResult" o|--|| "OkrTerm" : "okrTerm"
     "KeyResult" o|--|| "Objective" : "objective"
     "KeyResult" o|--|| "User" : "createdBy"
+    "KeyResult" o{--}o "Task" : "tasks"
+    "Task" o|--|| "KeyResult" : "keyResult"
 ```
