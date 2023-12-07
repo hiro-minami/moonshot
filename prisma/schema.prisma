@@ -114,4 +114,15 @@ model KeyResult {
     targetValue  Int
     unit         String
     currentValue Int
+    tasks        Task[]
+}
+
+model Task {
+    id          Int      @id @default(autoincrement())
+    name        String
+    keyResultId Int
+    keyResult   KeyResult @relation(fields: [keyResultId], references: [id])
+    isDone      Boolean
+    startDate   DateTime
+    endDate     DateTime
 }
