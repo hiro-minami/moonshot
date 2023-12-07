@@ -1,6 +1,6 @@
 import { MinusCircledIcon, PlusCircledIcon } from "@radix-ui/react-icons";
 import { IconButton } from "@radix-ui/themes";
-import { KeyResultCreateModalFooter } from "../../modal/key-result-crate-modal";
+import { KeyResultUpdateModalFooter } from "../../modal/key-result-update-modal";
 import { useKeyResultForm } from "./use-form";
 
 type KeyResultCreateFormProps = {
@@ -8,7 +8,7 @@ type KeyResultCreateFormProps = {
   objectiveId: number;
 };
 
-// TODO: FormProiderを使ってuserIdのprop drillingを解消する
+// TODO: バリデーションの追加
 export const KeyResultCreateForm = ({
   createdById,
   objectiveId,
@@ -74,7 +74,7 @@ export const KeyResultCreateForm = ({
           </div>
         ))}
       </div>
-      <KeyResultCreateModalFooter />
+      <KeyResultUpdateModalFooter />
     </form>
   );
 };
