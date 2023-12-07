@@ -28,6 +28,8 @@ export const ObjectiveCard = ({
     mutate({ id });
   }, [id, mutate]);
 
+  const progress = isNaN(progressRate) ? 0 : progressRate;
+
   return (
     <Card className="w-[100%]">
       <div className="flex flex-row items-center justify-between">
@@ -40,11 +42,11 @@ export const ObjectiveCard = ({
           </Box>
         </div>
         <div className="flex flex-row items-center gap-4">
-          <Tooltip content={`${progressRate}%`}>
+          <Tooltip content={`${progress}%`}>
             <div className="h-2.5 w-[100px] rounded-full  bg-gray-200">
               <div
                 className="h-full rounded-full bg-[#9f53ec]"
-                style={{ width: `${progressRate}%` }}
+                style={{ width: `${progress}%` }}
               />
             </div>
           </Tooltip>
