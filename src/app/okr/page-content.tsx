@@ -1,11 +1,11 @@
 "use client";
 
 import type { KeyResult, Objective } from "@prisma/client";
-import { ObjectiveCard } from "~/app/_components/card/objective-card";
-import { KeyResultCard } from "../_components/card/key-result-card";
-import { KeyResultCreateForm } from "../_components/form/key-result-create-form";
-import { CheckinModal } from "../_components/modal/check-in-modal";
-import { KeyResultCreateModal } from "../_components/modal/key-result-crate-modal";
+import { ObjectiveCard } from "~/app/_components/ui/card/objective-card";
+import { KeyResultCard } from "../_components/ui/card/key-result-card";
+import { KeyResultCreateForm } from "../_components/ui/form/key-result-create-form";
+import { CheckinModal } from "../_components/ui/modal/check-in-modal";
+import { KeyResultCreateModal } from "../_components/ui/modal/key-result-crate-modal";
 
 type PageContentProps = {
   createdById: string;

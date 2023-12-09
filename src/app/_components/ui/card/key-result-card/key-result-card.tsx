@@ -4,6 +4,7 @@ import { Box, Button, Card, Text, Tooltip } from "@radix-ui/themes";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import { api } from "~/trpc/react";
+
 import { CheckinModal } from "../../modal/check-in-modal";
 import { OptionButton } from "../_components";
 

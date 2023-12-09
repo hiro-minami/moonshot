@@ -1,7 +1,7 @@
 "use client";
 
-import { ObjectiveCreateForm } from "~/app/_components/form/objective-create-form";
-import { ObjectiveCreateModal } from "~/app/_components/modal/objective-create-modal";
+import { ObjectiveCreateForm } from "~/app/_components/ui/form/objective-create-form";
+import { ObjectiveCreateModal } from "~/app/_components/ui/modal/objective-create-modal";
 
 type PleaseOkrCreateContentProps = {
   createdById: string;
