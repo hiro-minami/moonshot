@@ -1,5 +1,10 @@
 import { createTRPCRouter } from "~/server/api/trpc";
-import { KeyResultRouter, objectiveRouter, okrTermRouter } from "./routers";
+import {
+  KeyResultRouter,
+  TaskRouter,
+  objectiveRouter,
+  okrTermRouter,
+} from "./routers";
 
 /**
  * This is the primary router for your server.
@@ -10,6 +15,7 @@ export const appRouter = createTRPCRouter({
   okrTerm: okrTermRouter,
   objective: objectiveRouter,
   keyResult: KeyResultRouter,
+  task: TaskRouter,
 });
 
 // export type definition of API

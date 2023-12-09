@@ -118,6 +118,9 @@ export const KeyResultRouter = createTRPCRouter({
             createdById: input.createdById,
           },
         },
+        include: {
+          tasks: true,
+        },
       });
     }),
 });
