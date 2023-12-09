@@ -1,16 +1,17 @@
 "use client";
 
-import type { KeyResult, Objective } from "@prisma/client";
-import { Grid } from "@radix-ui/themes";
+import type { Objective } from "@prisma/client";
 import { OkrSection } from "~/app/_components/ui/section/okr-section";
-import { TodoSection } from "~/app/_components/ui/section/todo-section";
+import { TaskSection } from "~/app/_components/ui/section/task-section";
+import type { KeyResultWithTasks } from "~/types";
 
 type PageContentProps = {
   createdById: string;
   objective: Objective;
-  keyResults: ReadonlyArray<KeyResult>;
+  keyResults: ReadonlyArray<KeyResultWithTasks>;
 };
 
+// レスポンシブ対応する
 export const PageContent = ({
   createdById,
   objective,
@@ -25,7 +26,7 @@ export const PageContent = ({
       keyResultprogressRateList.length,
   );
   return (
-    <Grid columns="2" gap="6" width="auto">
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
       <OkrSection
         createdById={createdById}
         objective={objective}
@@ -33,13 +34,11 @@ export const PageContent = ({
         objectiveProgressRate={objectiveProgressRate}
         keyResultprogressRateList={keyResultprogressRateList}
       />
-      <TodoSection
+      <TaskSection
         createdById={createdById}
         objective={objective}
-        keyResults={[] as KeyResult[]}
-        objectiveProgressRate={objectiveProgressRate}
-        keyResultprogressRateList={keyResultprogressRateList}
+        keyResults={keyResults}
       />
-    </Grid>
+    </div>
   );
 };
