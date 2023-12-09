@@ -1,11 +1,8 @@
 "use client";
 
 import type { KeyResult, Objective } from "@prisma/client";
-import { ObjectiveCard } from "~/app/_components/ui/card/objective-card";
-import { KeyResultCard } from "../_components/ui/card/key-result-card";
-import { KeyResultCreateForm } from "../_components/ui/form/key-result-create-form";
-import { CheckinModal } from "../_components/ui/modal/check-in-modal";
-import { KeyResultCreateModal } from "../_components/ui/modal/key-result-crate-modal";
+import { Grid } from "@radix-ui/themes";
+import { OkrSection } from "../_components/ui/section/okr-section";
 
 type PageContentProps = {
   createdById: string;
@@ -13,51 +10,28 @@ type PageContentProps = {
   keyResults: ReadonlyArray<KeyResult>;
 };
 
-// TODO: ObjectiveCardとKeyResultCardをtreeのように表示する
 export const PageContent = ({
   createdById,
   objective,
   keyResults,
 }: PageContentProps) => {
-  const progressRateList = keyResults.map((keyResult) =>
+  const keyResultprogressRateList = keyResults.map((keyResult) =>
     Math.round((keyResult.currentValue / keyResult.targetValue) * 100),
   );
 
   const objectiveProgressRate = Math.round(
-    progressRateList.reduce((a, b) => a + b, 0) / progressRateList.length,
+    keyResultprogressRateList.reduce((a, b) => a + b, 0) /
+      keyResultprogressRateList.length,
   );
   return (
-    <>
-      <div className="align-center flex justify-between">
-        <span className="text-[32px] font-bold">OKR</span>
-        {keyResults.length > 0 ? (
-          <CheckinModal keyResults={keyResults} />
-        ) : (
-          <KeyResultCreateModal>
-            <KeyResultCreateForm
-              createdById={createdById}
-              objectiveId={objective.id}
-            />
-          </KeyResultCreateModal>
-        )}
-      </div>
-
-      <div className="flex flex-col gap-4 pt-4">
-        <ObjectiveCard
-          id={objective.id}
-          name={objective.name}
-          progressRate={objectiveProgressRate}
-        />
-      </div>
-      <div className="flex flex-col gap-4 pl-[100px] pt-4">
-        {keyResults.map((keyResult, i) => (
-          <KeyResultCard
-            key={keyResult.id}
-            keyResult={keyResult}
-            progressRate={progressRateList[i]!}
-          />
-        ))}
-      </div>
-    </>
+    <Grid columns="2" gap="3" width="auto">
+      <OkrSection
+        createdById={createdById}
+        objective={objective}
+        keyResults={keyResults}
+        objectiveProgressRate={objectiveProgressRate}
+        keyResultprogressRateList={keyResultprogressRateList}
+      />
+    </Grid>
   );
 };
