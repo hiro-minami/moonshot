@@ -1,6 +1,6 @@
 import { getServerAuthSession } from "~/server/auth";
 import { api } from "~/trpc/server";
-import { PleaseOkrCreateContent } from "../_components/please-okr-create-content";
+import { PleaseOkrCreateContent } from "../_components/ui/please-okr-create-content";
 import { PageContent } from "./page-content";
 
 const Okr = async () => {

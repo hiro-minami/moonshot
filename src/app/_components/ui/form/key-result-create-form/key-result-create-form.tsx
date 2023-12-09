@@ -1,6 +1,6 @@
 import { MinusCircledIcon, PlusCircledIcon } from "@radix-ui/react-icons";
 import { IconButton } from "@radix-ui/themes";
-import { KeyResultUpdateModalFooter } from "../../modal/key-result-update-modal";
+import { KeyResultCreateModalFooter } from "../../modal/key-result-crate-modal";
 import { useKeyResultForm } from "./use-form";
 
 type KeyResultCreateFormProps = {
@@ -74,7 +74,7 @@ export const KeyResultCreateForm = ({
           </div>
         ))}
       </div>
-      <KeyResultUpdateModalFooter />
+      <KeyResultCreateModalFooter />
     </form>
   );
 };
