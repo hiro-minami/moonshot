@@ -1,7 +1,10 @@
+"use client";
+
 import type { KeyResult, Objective } from "@prisma/client";
-import { TopSection } from ".";
+
 import { KeyResultCard } from "../../card/key-result-card";
 import { ObjectiveCard } from "../../card/objective-card";
+import { TopSection } from "./top-section";
 
 type OkrSectionProps = {
   createdById: string;

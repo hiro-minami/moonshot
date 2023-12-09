@@ -1,3 +1,5 @@
+"use client";
+
 import type { KeyResult } from "@prisma/client";
 import { KeyResultCreateForm } from "../../form/key-result-create-form";
 import { CheckinModal } from "../../modal/check-in-modal";
