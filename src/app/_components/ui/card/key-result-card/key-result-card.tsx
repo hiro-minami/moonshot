@@ -42,7 +42,7 @@ export const KeyResultCard = ({
         </div>
         <div className="flex flex-row items-center gap-4">
           <CheckinModal keyResults={[keyResult]}>
-            <Button className="p-0">
+            <Button className="p-0 h-0">
               <Tooltip content={`${progressRate}%`}>
                 <div className="h-2.5 w-[100px] rounded-full  bg-gray-200">
                   <div
