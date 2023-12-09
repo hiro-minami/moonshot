@@ -2,7 +2,8 @@
 
 import type { KeyResult, Objective } from "@prisma/client";
 import { Grid } from "@radix-ui/themes";
-import { OkrSection } from "../_components/ui/section/okr-section";
+import { OkrSection } from "~/app/_components/ui/section/okr-section";
+import { TodoSection } from "~/app/_components/ui/section/todo-section";
 
 type PageContentProps = {
   createdById: string;
@@ -24,11 +25,18 @@ export const PageContent = ({
       keyResultprogressRateList.length,
   );
   return (
-    <Grid columns="2" gap="3" width="auto">
+    <Grid columns="2" gap="6" width="auto">
       <OkrSection
         createdById={createdById}
         objective={objective}
         keyResults={keyResults}
+        objectiveProgressRate={objectiveProgressRate}
+        keyResultprogressRateList={keyResultprogressRateList}
+      />
+      <TodoSection
+        createdById={createdById}
+        objective={objective}
+        keyResults={[] as KeyResult[]}
         objectiveProgressRate={objectiveProgressRate}
         keyResultprogressRateList={keyResultprogressRateList}
       />
