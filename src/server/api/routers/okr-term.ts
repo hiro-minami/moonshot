@@ -52,6 +52,17 @@ export const okrTermRouter = createTRPCRouter({
       orderBy: { id: "asc" },
     });
   }),
+  getOkrTerm: publicProcedure
+    .input(
+      z.object({
+        id: z.number(),
+      }),
+    )
+    .query(async ({ ctx, input }) => {
+      return ctx.db.okrTerm.findFirst({
+        where: { id: input.id },
+      });
+    }),
   getCurrentOkrTerm: publicProcedure.query(async ({ ctx }) => {
     const today = new Date();
     return ctx.db.okrTerm.findFirst({

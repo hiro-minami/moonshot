@@ -1,9 +1,9 @@
-import { Card, Avatar, Box, Text } from "@radix-ui/themes";
+import { Avatar, Box, Card, Text } from "@radix-ui/themes";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import { api } from "~/trpc/react";
 import { OptionButton } from "../_components";
-import Link from "next/link";
 
 type OkrTermCardProps = {
   id: number;
@@ -43,7 +43,7 @@ export const OkrTermCard = ({
             fallback="T"
           />
           <Box>
-            <Link href={`/okr`}>
+            <Link href={`/okr/${btoa(`OkrTermId:${id}`)}`}>
               <Text as="div" size="2" weight="bold">
                 {name}
               </Text>

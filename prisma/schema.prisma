@@ -123,5 +123,5 @@ model Task {
     keyResult   KeyResult @relation(fields: [keyResultId], references: [id])
     isDone      Boolean
     startDate   DateTime
-    endDate     DateTime
+    endDate     DateTime?
 }
