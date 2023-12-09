@@ -86,7 +86,7 @@ erDiagram
     Int keyResultId 
     Boolean isDone 
     DateTime startDate 
-    DateTime endDate 
+    DateTime endDate "❓"
     }
   
     "Post" o|--|| "User" : "createdBy"

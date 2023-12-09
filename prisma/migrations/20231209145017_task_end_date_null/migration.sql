@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Task" ALTER COLUMN "endDate" DROP NOT NULL;
