@@ -20,6 +20,41 @@ export const TaskRouter = createTRPCRouter({
         },
       });
     }),
+  updateTask: publicProcedure
+    .input(
+      z.object({
+        id: z.number(),
+        name: z.string(),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      return ctx.db.task.update({
+        where: { id: input.id },
+        data: {
+          name: input.name,
+        },
+      });
+    }),
+  finishTask: publicProcedure
+    .input(
+      z.object({
+        id: z.number(),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      return ctx.db.task.update({
+        where: { id: input.id },
+        data: {
+          isDone: true,
+          endDate: new Date(),
+        },
+      });
+    }),
+  deleteTask: publicProcedure
+    .input(z.object({ id: z.number() }))
+    .mutation(async ({ ctx, input }) => {
+      return ctx.db.task.delete({ where: { id: input.id } });
+    }),
   getTasks: publicProcedure
     .input(
       z.object({
