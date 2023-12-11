@@ -6,6 +6,18 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16.1
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: itadaki
+        volumes:
+          - postgres-data:/var/lib/postgresql/datas
+
     steps:
       - uses: actions/checkout@v4
       - name: Setup Node
