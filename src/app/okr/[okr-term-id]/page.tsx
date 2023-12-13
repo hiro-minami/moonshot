@@ -31,7 +31,7 @@ const Okr = async ({ params }: { params: { "okr-term-id": string } }) => {
   const keyResults = keyResultsQuery.sort((a, b) => a.id - b.id);
 
   return (
-    <div className="p-12">
+    <div className="px-12 py-[35px]">
       <PageContent
         objective={objective}
         keyResults={keyResults}

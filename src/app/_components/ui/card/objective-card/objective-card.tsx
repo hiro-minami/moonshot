@@ -1,5 +1,5 @@
 import { RocketIcon } from "@radix-ui/react-icons";
-import { Box, Card, Text, Tooltip } from "@radix-ui/themes";
+import { Card, Text, Tooltip } from "@radix-ui/themes";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import { api } from "~/trpc/react";
@@ -35,11 +35,9 @@ export const ObjectiveCard = ({
       <div className="flex flex-row items-center justify-between">
         <div className="flex flex-row items-center gap-[12px]">
           <RocketIcon className="w-[30px]" />
-          <Box>
-            <Text as="div" size="2" weight="bold">
-              {name}
-            </Text>
-          </Box>
+          <Text as="div" size="2" weight="bold">
+            {name}
+          </Text>
         </div>
         <div className="flex flex-row items-center gap-4">
           <Tooltip content={`${progress}%`}>
