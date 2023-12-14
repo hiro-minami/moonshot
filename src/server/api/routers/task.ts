@@ -35,6 +35,21 @@ export const TaskRouter = createTRPCRouter({
         },
       });
     }),
+  setDueDate: publicProcedure
+    .input(
+      z.object({
+        id: z.number(),
+        dueDate: z.date(),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      return ctx.db.task.update({
+        where: { id: input.id },
+        data: {
+          dueDate: input.dueDate,
+        },
+      });
+    }),
   finishTask: publicProcedure
     .input(
       z.object({
