@@ -11,4 +11,5 @@ export type Task = {
   isDone: boolean;
   startDate: Date;
   endDate: Date | null;
+  dueDate: Date | null;
 };
