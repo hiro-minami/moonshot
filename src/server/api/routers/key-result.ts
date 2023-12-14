@@ -101,6 +101,16 @@ export const KeyResultRouter = createTRPCRouter({
     .mutation(async ({ ctx, input }) => {
       return ctx.db.keyResult.delete({ where: { id: input.id } });
     }),
+  getKeyResultById: publicProcedure
+    .input(z.object({ id: z.number() }))
+    .query(async ({ ctx, input }) => {
+      return ctx.db.keyResult.findUnique({
+        where: { id: input.id },
+        include: {
+          tasks: true,
+        },
+      });
+    }),
   getKeyResults: publicProcedure
     .input(
       z.object({
