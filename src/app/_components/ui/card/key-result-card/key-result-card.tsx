@@ -1,7 +1,8 @@
 import type { KeyResult } from "@prisma/client";
 import { TargetIcon } from "@radix-ui/react-icons";
 import { Box, Button, Card, Text, Tooltip } from "@radix-ui/themes";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { useCallback } from "react";
 import { api } from "~/trpc/react";
 
@@ -18,6 +19,7 @@ export const KeyResultCard = ({
   progressRate,
 }: KeyResultCardProps) => {
   const router = useRouter();
+  const pathname = usePathname();
 
   const { mutate } = api.keyResult.deleteKeyResult.useMutation({
     onSuccess: () => {
@@ -35,9 +37,15 @@ export const KeyResultCard = ({
         <div className="flex flex-row items-center gap-[12px]">
           <TargetIcon className="w-[30px]" />
           <Box>
-            <Text as="div" size="2" weight="bold">
-              {keyResult.name}
-            </Text>
+            <Link
+              href={`${pathname}/key-result/${btoa(
+                `KeyResultId:${keyResult.id}`,
+              )}`}
+            >
+              <Text as="div" size="2" weight="bold">
+                {keyResult.name}
+              </Text>
+            </Link>
           </Box>
         </div>
         <div className="flex flex-row items-center gap-4">
