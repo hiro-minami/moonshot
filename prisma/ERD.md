@@ -87,6 +87,7 @@ erDiagram
     Boolean isDone 
     DateTime startDate 
     DateTime endDate "❓"
+    DateTime dueDate "❓"
     }
   
     "Post" o|--|| "User" : "createdBy"

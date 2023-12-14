@@ -124,4 +124,5 @@ model Task {
     isDone      Boolean
     startDate   DateTime
     endDate     DateTime?
+    dueDate     DateTime?
 }
