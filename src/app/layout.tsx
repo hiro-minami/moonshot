@@ -1,4 +1,5 @@
 import "@radix-ui/themes/styles.css";
+import "react-day-picker/dist/style.css";
 import "~/styles/globals.css";
 
 import { Inter } from "next/font/google";
