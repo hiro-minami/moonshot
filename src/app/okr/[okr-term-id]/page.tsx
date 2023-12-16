@@ -1,15 +1,14 @@
 import { PleaseOkrCreateContent } from "~/app/_components/ui/section/okr-section";
 import { getServerAuthSession } from "~/server/auth";
 import { api } from "~/trpc/server";
+import { extractId } from "~/utils";
 import { PageContent } from "./page-content";
 
 const Okr = async ({ params }: { params: { "okr-term-id": string } }) => {
   const session = await getServerAuthSession();
   if (!session?.user) return null;
 
-  const okrTermId = atob(decodeURIComponent(params["okr-term-id"])).split(
-    ":",
-  )[1];
+  const okrTermId = extractId(params["okr-term-id"]);
 
   const okrTerm = await api.okrTerm.getOkrTerm.query({
     id: Number(okrTermId),
