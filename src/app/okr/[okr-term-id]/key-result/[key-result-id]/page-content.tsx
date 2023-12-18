@@ -20,6 +20,7 @@ export const PageContent = ({ keyResult }: PageContentProps) => {
   );
 
   // 2. タスクを完了日でグループ化
+  // TODO: 完了日がないタスクをどうするか考える
   const tasksByDate = completedTasks.reduce(
     (acc, task) => {
       const date = task.endDate!.toLocaleDateString();
