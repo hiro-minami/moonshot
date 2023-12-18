@@ -129,7 +129,9 @@ export const KeyResultRouter = createTRPCRouter({
           },
         },
         include: {
-          tasks: true,
+          tasks: {
+            orderBy: [{ dueDate: "asc" }, { id: "asc" }],
+          },
         },
       });
     }),
