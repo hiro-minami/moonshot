@@ -9,6 +9,9 @@ type TaskItemProps = {
 
 export const TaskItem = ({ task, onClick }: TaskItemProps) => {
   if (task.isDone) return null;
+  const today = new Date();
+  const fontColor =
+    task.dueDate && task.dueDate < today ? "#EF4444" : "#9CA3AF";
   return (
     <div
       key={task.id}
@@ -21,7 +24,13 @@ export const TaskItem = ({ task, onClick }: TaskItemProps) => {
         />
         <span>{task.name}</span>
       </div>
-      <DueDatePicker />
+      {task.dueDate ? (
+        <span className="text-sm " style={{ color: fontColor }}>
+          {task.dueDate.toLocaleDateString()}
+        </span>
+      ) : (
+        <DueDatePicker taskId={task.id} />
+      )}
     </div>
   );
 };
