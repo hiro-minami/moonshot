@@ -1,6 +1,6 @@
 "use client";
 
-import { ScrollArea } from "@radix-ui/themes";
+import { ScrollArea, Tooltip } from "@radix-ui/themes";
 import { Chart, registerables } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { TaskItem } from "~/app/_components/ui/section/task-section/task-item";
@@ -14,12 +14,10 @@ export const PageContent = ({ keyResult }: PageContentProps) => {
   const taskCount = keyResult.tasks.length;
   const finishTaskCount = keyResult.tasks.filter((task) => task.isDone).length;
 
-  // 1. 完了したタスクだけをフィルタリング
   const completedTasks = keyResult.tasks.filter(
     (task) => task.isDone && task.endDate,
   );
 
-  // 2. タスクを完了日でグループ化
   // TODO: 完了日がないタスクをどうするか考える
   const tasksByDate = completedTasks.reduce(
     (acc, task) => {
@@ -34,7 +32,6 @@ export const PageContent = ({ keyResult }: PageContentProps) => {
     {} as Record<string, typeof completedTasks>,
   );
 
-  // 3. 各日付のタスク数を計算
   const taskCountsByDate = Object.entries(tasksByDate).map(([date, tasks]) => ({
     date,
     count: tasks.length,
@@ -47,6 +44,14 @@ export const PageContent = ({ keyResult }: PageContentProps) => {
 
   Chart.register(...registerables);
 
+  const options = {
+    maintainAspectRatio: false,
+    responsive: false,
+    lineTension: 0.4,
+  };
+
+  const width = window.innerWidth;
+
   return (
     <>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
@@ -54,21 +59,44 @@ export const PageContent = ({ keyResult }: PageContentProps) => {
       </div>
       <div>必要なタスク：{taskCount}</div>
       <div>完了したタスク：{finishTaskCount}</div>
-      <div className="w-[100%] y-[500px]">
-        <Line
-          data={{
-            labels: dates,
-            datasets: [
-              {
-                label: "完了したタスク",
-                data: counts,
-                fill: false,
-                backgroundColor: "rgb(75, 192, 192)",
-                borderColor: "rgba(75, 192, 192, 0.2)",
-              },
-            ],
-          }}
-        />
+      <div className="flex flex-row gap-4">
+        <div className="flex flex-col gap-2 bg-white">
+          <span>完了したタスク数の推移</span>
+          <Line
+            width={width / 1.5}
+            height={300}
+            data={{
+              labels: dates,
+              datasets: [
+                {
+                  label: "完了したタスク",
+                  data: counts,
+                  fill: false,
+                  backgroundColor: "#9f53ec",
+                  borderColor: "rgba(159, 83, 236, 0.2)",
+                },
+              ],
+            }}
+            options={options}
+          />
+        </div>
+        <div className="max-w-[30%] h-[332px] bg-white">
+          <div className="flex flex-col gap-[8px] bg-white">
+            <span>タスクの進捗率</span>
+            <Tooltip
+              content={`${Math.floor((finishTaskCount / taskCount) * 100)}%`}
+            >
+              <div
+                className="flex justify-center items-center mr-auto ml-auto w-[280px] h-[280px] rounded-[50%] ml-[49px] mr-[49px]"
+                style={{
+                  backgroundImage: `radial-gradient(#f2f2f2 60%, transparent 61%), conic-gradient(#9f53ec 0% ${Math.floor(
+                    (finishTaskCount / taskCount) * 100,
+                  )}%, #d9d9d9 60% 100%)`,
+                }}
+              />
+            </Tooltip>
+          </div>
+        </div>
       </div>
       <ScrollArea
         type="always"
