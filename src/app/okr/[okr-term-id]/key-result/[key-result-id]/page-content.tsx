@@ -1,8 +1,10 @@
 "use client";
 
-import { ScrollArea, Tooltip } from "@radix-ui/themes";
+import { Card, Grid, ScrollArea, Tooltip } from "@radix-ui/themes";
 import { Chart, registerables } from "chart.js";
 import { Line } from "react-chartjs-2";
+import { KeyResultCard } from "~/app/_components/ui/card/key-result-card";
+import { TaskCard } from "~/app/_components/ui/card/task-card";
 import { TaskItem } from "~/app/_components/ui/section/task-section/task-item";
 import type { KeyResultWithTasks } from "~/types";
 
@@ -40,8 +42,6 @@ export const PageContent = ({ keyResult }: PageContentProps) => {
   const dates = taskCountsByDate.map((task) => task.date);
   const counts = taskCountsByDate.map((task) => task.count);
 
-  console.log(taskCountsByDate);
-
   Chart.register(...registerables);
 
   const options = {
@@ -52,18 +52,23 @@ export const PageContent = ({ keyResult }: PageContentProps) => {
 
   const width = window.innerWidth;
 
+  const progressRate = Math.round(
+    (keyResult.currentValue / keyResult.targetValue) * 100,
+  );
+
   return (
-    <>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
-        {keyResult.name}
-      </div>
-      <div>必要なタスク：{taskCount}</div>
-      <div>完了したタスク：{finishTaskCount}</div>
-      <div className="flex flex-row gap-4">
-        <div className="flex flex-col gap-2 bg-white">
+    <div className="flex flex-col gap-4">
+      <KeyResultCard {...{ keyResult, progressRate, readonly: true }} />
+      <Grid columns="4" gap="4" className="w-[60%]">
+        <TaskCard name="タスク数" count={taskCount} />
+        <TaskCard name="未完了のタスク" count={taskCount - finishTaskCount} />
+        <TaskCard name="完了したタスク" count={finishTaskCount} />
+      </Grid>
+      <div className="flex flex-row justify-between">
+        <Card className="flex flex-col gap-2 bg-white">
           <span>完了したタスク数の推移</span>
           <Line
-            width={width / 1.5}
+            width={width / 1.6}
             height={300}
             data={{
               labels: dates,
@@ -79,10 +84,10 @@ export const PageContent = ({ keyResult }: PageContentProps) => {
             }}
             options={options}
           />
-        </div>
-        <div className="max-w-[30%] h-[332px] bg-white">
+        </Card>
+        <Card className="h-[348px]">
           <div className="flex flex-col gap-[8px] bg-white">
-            <span>タスクの進捗率</span>
+            <span>タスクの消化率</span>
             <Tooltip
               content={`${Math.floor((finishTaskCount / taskCount) * 100)}%`}
             >
@@ -96,21 +101,24 @@ export const PageContent = ({ keyResult }: PageContentProps) => {
               />
             </Tooltip>
           </div>
-        </div>
+        </Card>
       </div>
-      <ScrollArea
-        type="always"
-        scrollbars="vertical"
-        className="mt-2 p-6 bg-white"
-      >
-        {keyResult.tasks.map((task) => (
-          <TaskItem
-            key={task.id}
-            task={task}
-            onClick={() => console.log("click")}
-          />
-        ))}
-      </ScrollArea>
-    </>
+      {/** TODO: テーブルにする */}
+      <Card>
+        <ScrollArea
+          type="always"
+          scrollbars="vertical"
+          className="p-6 bg-white"
+        >
+          {keyResult.tasks.map((task) => (
+            <TaskItem
+              key={task.id}
+              task={task}
+              onClick={() => console.log("click")}
+            />
+          ))}
+        </ScrollArea>
+      </Card>
+    </div>
   );
 };
