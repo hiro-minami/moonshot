@@ -1,4 +1,6 @@
-import { Avatar, Box, Card, Text } from "@radix-ui/themes";
+"use client";
+import { Box, Card, Popover, Text } from "@radix-ui/themes";
+import Picker from "emoji-picker-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
@@ -8,6 +10,7 @@ import { OptionButton } from "../_components";
 type OkrTermCardProps = {
   id: number;
   name: string;
+  emoji?: string;
   startDate: Date;
   endDate: Date;
 };
@@ -15,6 +18,7 @@ type OkrTermCardProps = {
 export const OkrTermCard = ({
   id,
   name,
+  emoji,
   startDate,
   endDate,
 }: OkrTermCardProps) => {
@@ -31,17 +35,26 @@ export const OkrTermCard = ({
     mutate({ id });
   }, [id, mutate]);
 
-  // TODO: OKR期間を押下すると、それぞれのOKR期間の詳細ページに遷移するようにする
   return (
     <Card className="w-[100%]">
       <div className="flex flex-row items-center justify-between">
-        <div className="flex flex-row items-center gap-[16px]">
-          <Avatar
-            size="3"
-            src="https://images.unsplash.com/photo-1607346256330-dee7af15f7c5?&w=64&h=64&dpr=2&q=70&crop=focalpoint&fp-x=0.67&fp-y=0.5&fp-z=1.4&fit=crop"
-            radius="full"
-            fallback="T"
-          />
+        <div className="flex flex-row items-center gap-[20px] pl-2">
+          <Popover.Root>
+            <Popover.Trigger>
+              <Text as="div" size="5" weight="bold" className="cursor-pointer">
+                {emoji ? emoji : "🚀"}
+              </Text>
+            </Popover.Trigger>
+            <Popover.Content>
+              <Picker
+                width={300}
+                height={400}
+                onEmojiClick={(emoji) => {
+                  console.log(emoji);
+                }}
+              />
+            </Popover.Content>
+          </Popover.Root>
           <Box>
             <Link href={`/okr/${btoa(`OkrTermId:${id}`)}`}>
               <Text as="div" size="2" weight="bold">
