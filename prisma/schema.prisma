@@ -82,7 +82,7 @@ model VerificationToken {
 model OkrTerm {
     id          Int      @id @default(autoincrement())
     name        String
-    eomji       String?
+    emoji       String?
     createdById String
     createdBy   User   @relation(fields: [createdById], references: [id])
     startDate   DateTime
