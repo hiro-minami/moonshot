@@ -31,6 +31,7 @@ export const PageContent = ({ okrTerms, createdById }: Props) => {
               <OkrTermCard
                 key={okrTerm.id}
                 id={okrTerm.id}
+                emoji={okrTerm.emoji ?? "🚀"}
                 name={okrTerm.name}
                 startDate={okrTerm.startDate}
                 endDate={okrTerm.endDate}
