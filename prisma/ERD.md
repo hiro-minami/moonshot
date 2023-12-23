@@ -53,6 +53,7 @@ erDiagram
   "OkrTerm" {
     Int id "🗝️"
     String name 
+    String emoji "❓"
     String createdById 
     DateTime startDate 
     DateTime endDate 

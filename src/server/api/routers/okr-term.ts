@@ -42,6 +42,22 @@ export const okrTermRouter = createTRPCRouter({
         },
       });
     }),
+  updateEmoji: protectedProcedure
+    .input(
+      z.object({
+        id: z.number(),
+        emoji: z.string(),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      console.log(input);
+      return ctx.db.okrTerm.update({
+        where: { id: input.id },
+        data: {
+          emoji: input.emoji,
+        },
+      });
+    }),
   deleteOkrTerm: protectedProcedure
     .input(z.object({ id: z.number() }))
     .mutation(async ({ ctx, input }) => {
