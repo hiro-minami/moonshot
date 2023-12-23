@@ -10,7 +10,7 @@ import { OptionButton } from "../_components";
 type OkrTermCardProps = {
   id: number;
   name: string;
-  emoji?: string;
+  emoji: string;
   startDate: Date;
   endDate: Date;
 };
@@ -25,24 +25,37 @@ export const OkrTermCard = ({
   const router = useRouter();
   const formatDate = (date: Date) => date.toISOString().split("T")[0];
 
-  const { mutate } = api.okrTerm.deleteOkrTerm.useMutation({
+  const { mutate: deleteOkrTerm } = api.okrTerm.deleteOkrTerm.useMutation({
     onSuccess: () => {
       router.refresh();
     },
   });
 
-  const deleteOkrTerm = useCallback(() => {
-    mutate({ id });
-  }, [id, mutate]);
+  const handleDeleteOkrTerm = useCallback(() => {
+    deleteOkrTerm({ id });
+  }, [id, deleteOkrTerm]);
+
+  const { mutate: updateEmoji } = api.okrTerm.updateEmoji.useMutation({
+    onSuccess: () => {
+      router.refresh();
+    },
+  });
+
+  const updateEmojiHandler = useCallback(
+    (emoji: string) => {
+      updateEmoji({ id, emoji });
+    },
+    [id, updateEmoji],
+  );
 
   return (
     <Card className="w-[100%]">
       <div className="flex flex-row items-center justify-between">
-        <div className="flex flex-row items-center gap-[20px] pl-2">
+        <div className="flex flex-row items-center gap-[16px] pl-2">
           <Popover.Root>
             <Popover.Trigger>
-              <Text as="div" size="5" weight="bold" className="cursor-pointer">
-                {emoji ? emoji : "🚀"}
+              <Text as="div" size="8" weight="bold" className="cursor-pointer">
+                {emoji}
               </Text>
             </Popover.Trigger>
             <Popover.Content>
@@ -50,7 +63,7 @@ export const OkrTermCard = ({
                 width={300}
                 height={400}
                 onEmojiClick={(emoji) => {
-                  console.log(emoji);
+                  updateEmojiHandler(emoji.emoji);
                 }}
               />
             </Popover.Content>
@@ -66,7 +79,7 @@ export const OkrTermCard = ({
             </Text>
           </Box>
         </div>
-        <OptionButton onClick={deleteOkrTerm} />
+        <OptionButton onClick={handleDeleteOkrTerm} />
       </div>
     </Card>
   );
