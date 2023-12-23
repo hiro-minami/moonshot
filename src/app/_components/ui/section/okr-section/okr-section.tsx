@@ -22,7 +22,7 @@ export const OkrSection = ({
   keyResultprogressRateList,
 }: OkrSectionProps) => {
   return (
-    <div>
+    <div className="col-span-1">
       <TopSection
         createdById={createdById}
         objectiveId={objective.id}
