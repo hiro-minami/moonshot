@@ -31,7 +31,7 @@ export const TaskSection = ({ keyResults }: TaskSectionProps) => {
     [mutate],
   );
   return (
-    <div>
+    <div className="col-span-2">
       <TopSection />
       <div className="flex flex-col gap-4 mt-4 p-4 bg-white/80 border rounded">
         <TaskList keyResults={keyResults} onClick={handleFinishTask} />
