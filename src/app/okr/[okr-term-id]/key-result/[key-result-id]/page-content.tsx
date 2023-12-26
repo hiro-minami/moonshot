@@ -64,8 +64,8 @@ export const PageContent = ({ keyResult }: PageContentProps) => {
         <TaskCard name="未完了のタスク" count={taskCount - finishTaskCount} />
         <TaskCard name="完了したタスク" count={finishTaskCount} />
       </Grid>
-      <div className="flex flex-row justify-between">
-        <Card className="flex flex-col gap-2 bg-white">
+      <div className="grid grid-cols-10 gap-3">
+        <Card className="flex flex-col gap-2 bg-white col-span-7">
           <span>完了したタスク数の推移</span>
           <Line
             width={width / 1.6}
@@ -85,7 +85,7 @@ export const PageContent = ({ keyResult }: PageContentProps) => {
             options={options}
           />
         </Card>
-        <Card className="h-[348px]">
+        <Card className="h-[348px] col-span-3">
           <div className="flex flex-col gap-[8px] bg-white">
             <span>タスクの消化率</span>
             <Tooltip
@@ -103,7 +103,6 @@ export const PageContent = ({ keyResult }: PageContentProps) => {
           </div>
         </Card>
       </div>
-      {/** TODO: テーブルにする */}
       <Card>
         <ScrollArea
           type="always"

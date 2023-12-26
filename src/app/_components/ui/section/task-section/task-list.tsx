@@ -9,7 +9,7 @@ type TaskListProps = {
 };
 
 export const TaskList = ({ keyResults, onClick }: TaskListProps) => {
-  const height = window.innerHeight - 180;
+  const height = window.innerHeight - 244;
   return (
     <ScrollArea
       type="always"
