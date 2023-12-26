@@ -7,6 +7,7 @@ import { cookies } from "next/headers";
 
 import { Theme } from "@radix-ui/themes";
 import { TRPCReactProvider } from "~/trpc/react";
+import { TopBar } from "./_components/ui/top-bar/top-bar";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -29,6 +30,7 @@ export default function RootLayout({
       <body className={`bg-[#fffafa] font-sans ${inter.variable}`}>
         <Theme>
           <TRPCReactProvider cookies={cookies().toString()}>
+            <TopBar />
             {children}
           </TRPCReactProvider>
         </Theme>
