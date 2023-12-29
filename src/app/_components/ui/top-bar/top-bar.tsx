@@ -7,6 +7,7 @@ import {
   UserCircleGear,
 } from "@phosphor-icons/react";
 import { Button, DropdownMenu, Tooltip } from "@radix-ui/themes";
+import Link from "next/link";
 
 export const TopBar = () => {
   return (
@@ -94,7 +95,12 @@ export const TopBar = () => {
           <DropdownMenu.Content>
             <DropdownMenu.Item className="hover:bg-[#9f53ec]">
               <div className="flex flex-row items-center gap-2">
-                <span>ログアウト</span>
+                <Link
+                  href="/api/auth/signout"
+                  className="rounded-full no-underline transition"
+                >
+                  ログアウト
+                </Link>
               </div>
             </DropdownMenu.Item>
           </DropdownMenu.Content>
