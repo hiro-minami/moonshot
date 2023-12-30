@@ -1,7 +1,7 @@
 "use client";
 
 import { Button, Dialog } from "@radix-ui/themes";
-import { OkrTermCreateModalTitle } from ".";
+import { OkrTermCreateModalTitle } from "./okr-term-create-modal-title";
 
 type OkrTermCreateModalProps = {
   children: React.ReactNode;

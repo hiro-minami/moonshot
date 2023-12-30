@@ -2,15 +2,15 @@
 
 import { NotePencil } from "@phosphor-icons/react";
 import { Dialog, Tooltip } from "@radix-ui/themes";
-import { KeyResultUpdateModalTitle } from "./key-result-update-modal-title";
+import { ObjectiveUpdateModalTitle } from "./objective-update-modal-title";
 
-type KeyResultCreateModalProps = {
+type ObjectiveUpdateModalProps = {
   children: React.ReactNode;
 };
 
-export const KeyResultUpdateModal = ({
+export const ObjectiveUpdateModal = ({
   children,
-}: KeyResultCreateModalProps) => {
+}: ObjectiveUpdateModalProps) => {
   return (
     <Dialog.Root>
       <Tooltip content="編集する" delayDuration={100}>
@@ -23,7 +23,7 @@ export const KeyResultUpdateModal = ({
       </Tooltip>
       <Dialog.Content>
         <Dialog.Title>
-          <KeyResultUpdateModalTitle />
+          <ObjectiveUpdateModalTitle />
         </Dialog.Title>
         {children}
       </Dialog.Content>

@@ -1,9 +1,9 @@
 "use client";
 
-import { Button, Dialog } from "@radix-ui/themes";
-import { CheckInModalTitle } from "./check-in-modal-title";
 import type { KeyResult } from "@prisma/client";
+import { Button, Dialog } from "@radix-ui/themes";
 import { CheckinForm } from "../../form/check-in-form";
+import { CheckInModalTitle } from "./check-in-modal-title";
 
 type CheckinModalProps = {
   children?: React.ReactNode;

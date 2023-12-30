@@ -26,8 +26,6 @@ export const objectiveRouter = createTRPCRouter({
       z.object({
         id: z.number(),
         name: z.string(),
-        createdById: z.string(),
-        okrTermId: z.number(),
         description: z.string(),
       }),
     )
@@ -36,8 +34,6 @@ export const objectiveRouter = createTRPCRouter({
         where: { id: input.id },
         data: {
           name: input.name,
-          createdBy: { connect: { id: input.createdById } },
-          okrTerm: { connect: { id: input.okrTermId } },
           description: input.description,
         },
       });
