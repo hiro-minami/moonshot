@@ -26,7 +26,6 @@ export const okrTermRouter = createTRPCRouter({
       z.object({
         id: z.number(),
         name: z.string(),
-        createdById: z.string(),
         startDate: z.date(),
         endDate: z.date(),
       }),
@@ -36,7 +35,6 @@ export const okrTermRouter = createTRPCRouter({
         where: { id: input.id },
         data: {
           name: input.name,
-          createdBy: { connect: { id: input.createdById } },
           startDate: input.startDate,
           endDate: input.endDate,
         },
