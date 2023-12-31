@@ -1,11 +1,13 @@
 import type { KeyResult } from "@prisma/client";
-import { TargetIcon } from "@radix-ui/react-icons";
-import { Box, Card } from "@radix-ui/themes";
-import { useRouter } from "next/navigation";
+import { Box, Card, Tooltip } from "@radix-ui/themes";
+import { usePathname, useRouter } from "next/navigation";
 import { useCallback } from "react";
 import { api } from "~/trpc/react";
 
-import { OptionButton } from "../_components";
+import { ChartBar, Target, Trash } from "@phosphor-icons/react";
+import Link from "next/link";
+import { KeyResultUpdateForm } from "../../form/key-result-update-form";
+import { KeyResultUpdateModal } from "../../modal/key-result-update-modal";
 import { KeyResultName } from "./key-result-name";
 import { KeyResultProgressRate } from "./key-result-progress-rate";
 
@@ -21,6 +23,7 @@ export const KeyResultCard = ({
   readonly = false,
 }: KeyResultCardProps) => {
   const router = useRouter();
+  const pathname = usePathname();
 
   const { mutate } = api.keyResult.deleteKeyResult.useMutation({
     onSuccess: () => {
@@ -35,23 +38,42 @@ export const KeyResultCard = ({
   return (
     <Card className="w-[100%]">
       <div className="flex flex-row items-center justify-between">
-        <div className="flex flex-row items-center gap-[12px]">
-          <TargetIcon className="w-[30px]" />
+        <div className="flex flex-row items-center gap-2">
+          <Target size={20} />
           <Box>
-            <KeyResultName
-              id={keyResult.id}
-              name={keyResult.name}
-              readonly={readonly}
-            />
+            <KeyResultName name={keyResult.name} readonly={readonly} />
           </Box>
         </div>
-        <div className="flex flex-row items-center gap-4">
-          <KeyResultProgressRate {...{ keyResult, progressRate, readonly }} />
-          {!readonly && (
-            <OptionButton onClick={deleteKeyResult} keyResult={keyResult} />
-          )}
-        </div>
+        <KeyResultProgressRate {...{ keyResult, progressRate, readonly }} />
       </div>
+      {!readonly && (
+        <div className="flex flex-row gap-2 justify-end pt-2">
+          <Tooltip content="ダッシュボードを見る" delayDuration={100}>
+            <Link
+              href={`${pathname}/key-result/${btoa(
+                `KeyResultId:${keyResult.id}`,
+              )}`}
+            >
+              <ChartBar
+                size={20}
+                className="cursor-pointer text-[#9CA3AF] hover:text-[#9f53ec]"
+              />
+            </Link>
+          </Tooltip>
+
+          <KeyResultUpdateModal>
+            <KeyResultUpdateForm keyResult={keyResult} />
+          </KeyResultUpdateModal>
+
+          <Tooltip content="削除する" delayDuration={100}>
+            <Trash
+              size={20}
+              className="cursor-pointer text-[#9CA3AF] hover:text-[#9f53ec]"
+              onClick={deleteKeyResult}
+            />
+          </Tooltip>
+        </div>
+      )}
     </Card>
   );
 };
