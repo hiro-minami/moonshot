@@ -30,12 +30,11 @@ export const OkrSection = ({
       />
       <div className="flex flex-col gap-4 pt-4">
         <ObjectiveCard
-          id={objective.id}
-          name={objective.name}
+          objective={objective}
           progressRate={objectiveProgressRate}
         />
       </div>
-      <div className="flex flex-col gap-4 pl-[100px] pt-4">
+      <div className="flex flex-col gap-4 pl-[80px] pt-4">
         {keyResults.map((keyResult, i) => (
           <KeyResultCard
             key={keyResult.id}

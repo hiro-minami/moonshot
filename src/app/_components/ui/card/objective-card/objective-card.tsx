@@ -1,19 +1,19 @@
-import { RocketIcon } from "@radix-ui/react-icons";
-import { Card, Text, Tooltip } from "@radix-ui/themes";
+import { RocketLaunch, Trash } from "@phosphor-icons/react";
+import type { Objective } from "@prisma/client";
+import { Card, Tooltip } from "@radix-ui/themes";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import { api } from "~/trpc/react";
-import { OptionButton } from "../_components";
+import { ObjectiveUpdateForm } from "../../form/objective-update-form";
+import { ObjectiveUpdateModal } from "../../modal/objective-update-modal";
 
 type ObjectiveCardProps = {
-  id: number;
-  name: string;
+  objective: Objective;
   progressRate: number;
 };
 
 export const ObjectiveCard = ({
-  id,
-  name,
+  objective,
   progressRate,
 }: ObjectiveCardProps) => {
   const router = useRouter();
@@ -25,22 +25,24 @@ export const ObjectiveCard = ({
   });
 
   const deleteObjective = useCallback(() => {
-    mutate({ id });
-  }, [id, mutate]);
+    mutate({ id: objective.id });
+  }, [objective, mutate]);
 
   const progress = isNaN(progressRate) ? 0 : progressRate;
 
   return (
     <Card className="w-[100%]">
-      <div className="flex flex-row items-center justify-between">
-        <div className="flex flex-row items-center gap-[12px]">
-          <RocketIcon className="w-[30px]" />
-          <Text as="div" size="2" weight="bold">
-            {name}
-          </Text>
-        </div>
-        <div className="flex flex-row items-center gap-4">
-          <Tooltip content={`${progress}%`}>
+      <div className="flex flex-col gap-2">
+        <div className="flex flex-row items-center justify-between">
+          <div className="flex flex-row items-center gap-2">
+            <RocketLaunch size={20} />
+            <Tooltip content={objective.name} delayDuration={100}>
+              <p className="font-bold text-sm w-[272px] truncate ...">
+                {objective.name}
+              </p>
+            </Tooltip>
+          </div>
+          <Tooltip content={`${progress}%`} delayDuration={100}>
             <div className="h-2.5 w-[100px] rounded-full  bg-gray-200">
               <div
                 className="h-full rounded-full bg-[#9f53ec]"
@@ -48,7 +50,20 @@ export const ObjectiveCard = ({
               />
             </div>
           </Tooltip>
-          <OptionButton onClick={deleteObjective} />
+        </div>
+
+        <div className="flex flex-row gap-2 justify-end">
+          <ObjectiveUpdateModal>
+            <ObjectiveUpdateForm objective={objective} />
+          </ObjectiveUpdateModal>
+
+          <Tooltip content="削除する" delayDuration={100}>
+            <Trash
+              size={20}
+              className="cursor-pointer text-[#9CA3AF] hover:text-[#9f53ec]"
+              onClick={deleteObjective}
+            />
+          </Tooltip>
         </div>
       </div>
     </Card>
