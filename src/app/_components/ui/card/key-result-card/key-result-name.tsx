@@ -1,27 +1,21 @@
-import { Text } from "@radix-ui/themes";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { Tooltip } from "@radix-ui/themes";
 
 type KeyResultNameProps = {
-  id: number;
   name: string;
   readonly: boolean;
 };
 
-export const KeyResultName = ({ id, name, readonly }: KeyResultNameProps) => {
-  const pathname = usePathname();
+export const KeyResultName = ({ name, readonly }: KeyResultNameProps) => {
   if (readonly) {
     return (
-      <Text as="div" size="2" weight="bold">
-        {name}
-      </Text>
+      <Tooltip content={name} delayDuration={100}>
+        <p className="font-bold text-sm">{name}</p>
+      </Tooltip>
     );
   }
   return (
-    <Link href={`${pathname}/key-result/${btoa(`KeyResultId:${id}`)}`}>
-      <Text as="div" size="2" weight="bold">
-        {name}
-      </Text>
-    </Link>
+    <Tooltip content={name} delayDuration={100}>
+      <p className="font-bold text-sm w-[200px] truncate ...">{name}</p>
+    </Tooltip>
   );
 };

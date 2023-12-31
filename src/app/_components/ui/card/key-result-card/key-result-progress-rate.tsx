@@ -15,7 +15,7 @@ export const KeyResultProgressRate = ({
 }: KeyResultProgressRateProps) => {
   if (readonly) {
     return (
-      <Tooltip content={`${progressRate}%`}>
+      <Tooltip content={`${progressRate}%`} delayDuration={100}>
         <div className="h-2.5 w-[100px] rounded-full  bg-gray-200">
           <div
             className="h-full rounded-full bg-[#9f53ec]"
@@ -28,7 +28,7 @@ export const KeyResultProgressRate = ({
   return (
     <CheckinModal keyResults={[keyResult]}>
       <Button className="p-0 h-0">
-        <Tooltip content={`${progressRate}%`}>
+        <Tooltip content={`${progressRate}%`} delayDuration={100}>
           <div className="h-2.5 w-[100px] rounded-full  bg-gray-200">
             <div
               className="h-full rounded-full bg-[#9f53ec]"

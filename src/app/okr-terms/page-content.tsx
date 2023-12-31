@@ -28,14 +28,7 @@ export const PageContent = ({ okrTerms, createdById }: Props) => {
         {okrTerms.length > 0 ? (
           <div className="flex flex-col gap-4 pt-4">
             {okrTerms.map((okrTerm) => (
-              <OkrTermCard
-                key={okrTerm.id}
-                id={okrTerm.id}
-                emoji={okrTerm.emoji ?? "🚀"}
-                name={okrTerm.name}
-                startDate={okrTerm.startDate}
-                endDate={okrTerm.endDate}
-              />
+              <OkrTermCard key={okrTerm.id} okrTerm={okrTerm} />
             ))}
           </div>
         ) : (
