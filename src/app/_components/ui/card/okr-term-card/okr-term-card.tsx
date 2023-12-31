@@ -1,27 +1,20 @@
 "use client";
+import { Trash } from "@phosphor-icons/react";
+import type { OkrTerm } from "@prisma/client";
 import { Box, Card, Popover, Text } from "@radix-ui/themes";
 import Picker from "emoji-picker-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import { api } from "~/trpc/react";
-import { OptionButton } from "../_components";
+import { OkrTermUpdateForm } from "../../form/okr-term-update-form";
+import { OkrTermUpdateModal } from "../../modal/okr-term-update-modal";
 
 type OkrTermCardProps = {
-  id: number;
-  name: string;
-  emoji: string;
-  startDate: Date;
-  endDate: Date;
+  okrTerm: OkrTerm;
 };
 
-export const OkrTermCard = ({
-  id,
-  name,
-  emoji,
-  startDate,
-  endDate,
-}: OkrTermCardProps) => {
+export const OkrTermCard = ({ okrTerm }: OkrTermCardProps) => {
   const router = useRouter();
   const formatDate = (date: Date) => date.toISOString().split("T")[0];
 
@@ -32,8 +25,8 @@ export const OkrTermCard = ({
   });
 
   const handleDeleteOkrTerm = useCallback(() => {
-    deleteOkrTerm({ id });
-  }, [id, deleteOkrTerm]);
+    deleteOkrTerm({ id: okrTerm.id });
+  }, [okrTerm, deleteOkrTerm]);
 
   const { mutate: updateEmoji } = api.okrTerm.updateEmoji.useMutation({
     onSuccess: () => {
@@ -43,9 +36,9 @@ export const OkrTermCard = ({
 
   const updateEmojiHandler = useCallback(
     (emoji: string) => {
-      updateEmoji({ id, emoji });
+      updateEmoji({ id: okrTerm.id, emoji });
     },
-    [id, updateEmoji],
+    [okrTerm, updateEmoji],
   );
 
   return (
@@ -55,7 +48,7 @@ export const OkrTermCard = ({
           <Popover.Root>
             <Popover.Trigger>
               <Text as="div" size="8" weight="bold" className="cursor-pointer">
-                {emoji}
+                {okrTerm.emoji}
               </Text>
             </Popover.Trigger>
             <Popover.Content>
@@ -69,17 +62,26 @@ export const OkrTermCard = ({
             </Popover.Content>
           </Popover.Root>
           <Box>
-            <Link href={`/okr/${btoa(`OkrTermId:${id}`)}`}>
+            <Link href={`/okr/${btoa(`OkrTermId:${okrTerm.id}`)}`}>
               <Text as="div" size="2" weight="bold">
-                {name}
+                {okrTerm.name}
               </Text>
             </Link>
             <Text as="div" size="2" weight="bold">
-              {formatDate(startDate)} ~ {formatDate(endDate)}
+              {formatDate(okrTerm.startDate)} ~ {formatDate(okrTerm.endDate)}
             </Text>
           </Box>
         </div>
-        <OptionButton onClick={handleDeleteOkrTerm} />
+        <div className="flex flex-row gap-2 justify-end">
+          <OkrTermUpdateModal>
+            <OkrTermUpdateForm okrTerm={okrTerm} />
+          </OkrTermUpdateModal>
+          <Trash
+            size={20}
+            className="cursor-pointer text-[#9CA3AF] hover:text-[#9f53ec]"
+            onClick={handleDeleteOkrTerm}
+          />
+        </div>
       </div>
     </Card>
   );
