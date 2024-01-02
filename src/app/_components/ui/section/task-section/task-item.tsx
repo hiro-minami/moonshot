@@ -1,5 +1,6 @@
+import { CheckCircle } from "@phosphor-icons/react";
 import type { Task } from "@prisma/client";
-import { CheckCircledIcon } from "@radix-ui/react-icons";
+import { Tooltip } from "@radix-ui/themes";
 import { DueDatePicker } from "./duedate-picker";
 
 type TaskItemProps = {
@@ -18,10 +19,13 @@ export const TaskItem = ({ task, onClick }: TaskItemProps) => {
       className="flex flex-row gap-2 items-center justify-between"
     >
       <div className="flex flex-row gap-2 items-center">
-        <CheckCircledIcon
-          onClick={() => onClick(task.id)}
-          className="cursor-pointer text-[#E5E7EB] hover:text-[#9f53ec]"
-        />
+        <Tooltip content="完了する" delayDuration={100}>
+          <CheckCircle
+            size={20}
+            onClick={() => onClick(task.id)}
+            className="cursor-pointer text-[#9CA3AF] hover:text-[#9f53ec]"
+          />
+        </Tooltip>
         <span>{task.name}</span>
       </div>
       {task.dueDate ? (
