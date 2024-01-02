@@ -1,12 +1,8 @@
 "use client";
 
-import {
-  FlagCheckered,
-  ListPlus,
-  TrendUp,
-  UserCircleGear,
-} from "@phosphor-icons/react";
+import { FlagCheckered, TrendUp, UserCircleGear } from "@phosphor-icons/react";
 import { Button, DropdownMenu, Tooltip } from "@radix-ui/themes";
+
 import Link from "next/link";
 
 export const TopBar = () => {
@@ -20,37 +16,6 @@ export const TopBar = () => {
         <DropdownMenu.Root>
           <DropdownMenu.Trigger>
             <Button variant="ghost">
-              <Tooltip content="作る">
-                <ListPlus
-                  color="#fffafa"
-                  size={24}
-                  weight="bold"
-                  className="cursor-pointer"
-                />
-              </Tooltip>
-            </Button>
-          </DropdownMenu.Trigger>
-          <DropdownMenu.Content>
-            <DropdownMenu.Item className="hover:bg-[#9f53ec]">
-              <div className="flex flex-row items-center gap-2">
-                <span>目標を作る</span>
-              </div>
-            </DropdownMenu.Item>
-            <DropdownMenu.Item className="hover:bg-[#9f53ec]">
-              <div className="flex flex-row items-center gap-2">
-                <span>計測する指標を作る</span>
-              </div>
-            </DropdownMenu.Item>
-            <DropdownMenu.Item className="hover:bg-[#9f53ec]">
-              <div className="flex flex-row items-center gap-2">
-                <span>目標のためにやることを作る</span>
-              </div>
-            </DropdownMenu.Item>
-          </DropdownMenu.Content>
-        </DropdownMenu.Root>
-        <DropdownMenu.Root>
-          <DropdownMenu.Trigger>
-            <Button variant="ghost">
               <Tooltip content="確認する">
                 <TrendUp
                   color="#fffafa"
@@ -61,21 +26,17 @@ export const TopBar = () => {
               </Tooltip>
             </Button>
           </DropdownMenu.Trigger>
+
           <DropdownMenu.Content>
             <DropdownMenu.Item className="hover:bg-[#9f53ec]">
-              <div className="flex flex-row items-center gap-2">
+              <Link href="/okr-terms">
                 <span>目標の一覧を見る</span>
-              </div>
+              </Link>
             </DropdownMenu.Item>
             <DropdownMenu.Item className="hover:bg-[#9f53ec]">
-              <div className="flex flex-row items-center gap-2">
-                <span>目標と計測する指標を見る</span>
-              </div>
-            </DropdownMenu.Item>
-            <DropdownMenu.Item className="hover:bg-[#9f53ec]">
-              <div className="flex flex-row items-center gap-2">
-                <span>目標のためにやることの一覧を見る</span>
-              </div>
+              <Link href="/okr">
+                <span>現在の目標と計測する指標を見る</span>
+              </Link>
             </DropdownMenu.Item>
           </DropdownMenu.Content>
         </DropdownMenu.Root>
