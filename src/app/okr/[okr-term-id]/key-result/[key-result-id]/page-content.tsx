@@ -34,10 +34,12 @@ export const PageContent = ({ keyResult }: PageContentProps) => {
     {} as Record<string, typeof completedTasks>,
   );
 
-  const taskCountsByDate = Object.entries(tasksByDate).map(([date, tasks]) => ({
-    date,
-    count: tasks.length,
-  }));
+  const taskCountsByDate = Object.entries(tasksByDate)
+    .map(([date, tasks]) => ({
+      date,
+      count: tasks.length,
+    }))
+    .sort((a, b) => (new Date(a.date) < new Date(b.date) ? -1 : 1));
 
   const dates = taskCountsByDate.map((task) => task.date);
   const counts = taskCountsByDate.map((task) => task.count);
@@ -90,6 +92,7 @@ export const PageContent = ({ keyResult }: PageContentProps) => {
             <span>タスクの消化率</span>
             <Tooltip
               content={`${Math.floor((finishTaskCount / taskCount) * 100)}%`}
+              delayDuration={100}
             >
               <div
                 className="flex justify-center items-center mr-auto ml-auto w-[280px] h-[280px] rounded-[50%] ml-[49px] mr-[49px]"

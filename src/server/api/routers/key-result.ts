@@ -107,7 +107,9 @@ export const KeyResultRouter = createTRPCRouter({
       return ctx.db.keyResult.findUnique({
         where: { id: input.id },
         include: {
-          tasks: true,
+          tasks: {
+            orderBy: [{ dueDate: "asc" }, { id: "asc" }],
+          },
         },
       });
     }),
