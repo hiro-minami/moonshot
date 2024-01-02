@@ -55,7 +55,7 @@ export const KeyResultCreateForm = ({
                     単位
                   </label>
                   <input
-                    className="h-[30px] w-[40px] border-b-2 outline-0 focus-within:border-[#9f53ec]"
+                    className="h-[30px] w-[100px] border-b-2 outline-0 focus-within:border-[#9f53ec]"
                     id={`unit${index}`}
                     {...register(`keyResults.${index}.unit`)}
                   />
