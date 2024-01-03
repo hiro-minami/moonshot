@@ -48,7 +48,7 @@ export const OkrTermCard = ({ okrTerm }: OkrTermCardProps) => {
           <Popover.Root>
             <Popover.Trigger>
               <Text as="div" size="8" weight="bold" className="cursor-pointer">
-                {okrTerm.emoji}
+                {okrTerm.emoji ?? "🎯"}
               </Text>
             </Popover.Trigger>
             <Popover.Content>
@@ -63,7 +63,12 @@ export const OkrTermCard = ({ okrTerm }: OkrTermCardProps) => {
           </Popover.Root>
           <Box>
             <Link href={`/okr/${btoa(`OkrTermId:${okrTerm.id}`)}`}>
-              <Text as="div" size="2" weight="bold">
+              <Text
+                as="div"
+                size="2"
+                weight="bold"
+                className="hover:text-[#9f53ec]"
+              >
                 {okrTerm.name}
               </Text>
             </Link>
