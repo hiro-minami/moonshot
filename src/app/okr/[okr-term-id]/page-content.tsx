@@ -6,28 +6,33 @@ import { TaskSection } from "~/app/_components/ui/section/task-section";
 import type { KeyResultWithTasks } from "~/types";
 
 type PageContentProps = {
+  okrTermId: number;
   createdById: string;
   objective: Objective;
   keyResults: ReadonlyArray<KeyResultWithTasks>;
 };
 
-// レスポンシブ対応する
 export const PageContent = ({
+  okrTermId,
   createdById,
   objective,
   keyResults,
 }: PageContentProps) => {
   const keyResultprogressRateList = keyResults.map((keyResult) =>
-    Math.round((keyResult.currentValue / keyResult.targetValue) * 100),
+    keyResult.targetValue !== 0
+      ? Math.round((keyResult.currentValue / keyResult.targetValue) * 100)
+      : 0,
   );
 
   const objectiveProgressRate = Math.round(
     keyResultprogressRateList.reduce((a, b) => a + b, 0) /
       keyResultprogressRateList.length,
   );
+  console.log("keyResultprogressRateList", keyResultprogressRateList);
   return (
     <div className="grid grid-cols-3 gap-8">
       <OkrSection
+        okrTermId={okrTermId}
         createdById={createdById}
         objective={objective}
         keyResults={keyResults}

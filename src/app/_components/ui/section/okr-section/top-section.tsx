@@ -6,11 +6,13 @@ import { CheckinModal } from "../../modal/check-in-modal";
 import { KeyResultCreateModal } from "../../modal/key-result-crate-modal";
 
 type TopSectionProps = {
+  okrTermId: number;
   createdById: string;
   objectiveId: number;
   keyResults: ReadonlyArray<KeyResult>;
 };
 export const TopSection = ({
+  okrTermId,
   createdById,
   objectiveId,
   keyResults,
@@ -23,6 +25,7 @@ export const TopSection = ({
       ) : (
         <KeyResultCreateModal>
           <KeyResultCreateForm
+            okrTermId={okrTermId}
             createdById={createdById}
             objectiveId={objectiveId}
           />

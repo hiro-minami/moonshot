@@ -3,14 +3,18 @@ import { ObjectiveCreateModalFooter } from "../../modal/objective-create-modal";
 import { useObjectiveForm } from "./use-form";
 
 type OkrTermCreateFormProps = {
+  okrTermId: number;
   createdById: string;
 };
 
-// TODO: FormProiderを使ってuserIdのprop drillingを解消する
 export const ObjectiveCreateForm = ({
+  okrTermId,
   createdById,
 }: OkrTermCreateFormProps) => {
-  const { onSubmit, handleSubmit, register } = useObjectiveForm(createdById);
+  const { onSubmit, handleSubmit, register } = useObjectiveForm(
+    okrTermId,
+    createdById,
+  );
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
