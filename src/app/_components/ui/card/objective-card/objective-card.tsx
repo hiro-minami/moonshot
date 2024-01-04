@@ -1,8 +1,10 @@
+"use client";
+
 import { RocketLaunch, Trash } from "@phosphor-icons/react";
 import type { Objective } from "@prisma/client";
 import { Card, Tooltip } from "@radix-ui/themes";
 import { useRouter } from "next/navigation";
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import { api } from "~/trpc/react";
 import { ObjectiveUpdateForm } from "../../form/objective-update-form";
 import { ObjectiveUpdateModal } from "../../modal/objective-update-modal";
@@ -17,6 +19,7 @@ export const ObjectiveCard = ({
   progressRate,
 }: ObjectiveCardProps) => {
   const router = useRouter();
+  const width = useMemo<number>(() => Math.round(window.innerWidth * 0.21), []);
 
   const { mutate } = api.objective.deleteObjective.useMutation({
     onSuccess: () => {
@@ -37,7 +40,7 @@ export const ObjectiveCard = ({
           <div className="flex flex-row items-center gap-2">
             <RocketLaunch size={20} />
             <Tooltip content={objective.name} delayDuration={100}>
-              <p className="font-bold text-sm w-[272px] truncate ...">
+              <p className="font-bold text-sm truncate ..." style={{ width }}>
                 {objective.name}
               </p>
             </Tooltip>
