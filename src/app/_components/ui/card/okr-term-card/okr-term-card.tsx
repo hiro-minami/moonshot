@@ -1,5 +1,4 @@
 "use client";
-import { Trash } from "@phosphor-icons/react";
 import type { OkrTerm } from "@prisma/client";
 import { Box, Card, Popover, Text } from "@radix-ui/themes";
 import Picker from "emoji-picker-react";
@@ -8,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import { api } from "~/trpc/react";
 import { OkrTermUpdateForm } from "../../form/okr-term-update-form";
+import { OkrTermDeleteAlertModal } from "../../modal/alert-modal/okr-term-delete-alert-modal/okr-term-delete-alert-modal";
 import { OkrTermUpdateModal } from "../../modal/okr-term-update-modal";
 
 type OkrTermCardProps = {
@@ -81,11 +81,7 @@ export const OkrTermCard = ({ okrTerm }: OkrTermCardProps) => {
           <OkrTermUpdateModal>
             <OkrTermUpdateForm okrTerm={okrTerm} />
           </OkrTermUpdateModal>
-          <Trash
-            size={20}
-            className="cursor-pointer text-[#9CA3AF] hover:text-[#9f53ec]"
-            onClick={handleDeleteOkrTerm}
-          />
+          <OkrTermDeleteAlertModal onClick={handleDeleteOkrTerm} />
         </div>
       </div>
     </Card>

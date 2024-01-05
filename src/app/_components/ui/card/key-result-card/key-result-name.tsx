@@ -1,4 +1,5 @@
 import { Tooltip } from "@radix-ui/themes";
+import { useMemo } from "react";
 
 type KeyResultNameProps = {
   name: string;
@@ -6,6 +7,11 @@ type KeyResultNameProps = {
 };
 
 export const KeyResultName = ({ name, readonly }: KeyResultNameProps) => {
+  const width = useMemo<number>(
+    () => Math.round(window.innerWidth * 0.145),
+    [],
+  );
+
   if (readonly) {
     return (
       <Tooltip content={name} delayDuration={100}>
@@ -13,9 +19,12 @@ export const KeyResultName = ({ name, readonly }: KeyResultNameProps) => {
       </Tooltip>
     );
   }
+
   return (
     <Tooltip content={name} delayDuration={100}>
-      <p className="font-bold text-sm w-[200px] truncate ...">{name}</p>
+      <p className="font-bold text-sm truncate ..." style={{ width }}>
+        {name}
+      </p>
     </Tooltip>
   );
 };
