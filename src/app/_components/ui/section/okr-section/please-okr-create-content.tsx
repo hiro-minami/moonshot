@@ -4,10 +4,12 @@ import { ObjectiveCreateForm } from "~/app/_components/ui/form/objective-create-
 import { ObjectiveCreateModal } from "~/app/_components/ui/modal/objective-create-modal";
 
 type PleaseOkrCreateContentProps = {
+  okrTermId: number;
   createdById: string;
 };
 
 export const PleaseOkrCreateContent = ({
+  okrTermId,
   createdById,
 }: PleaseOkrCreateContentProps) => {
   return (
@@ -16,7 +18,7 @@ export const PleaseOkrCreateContent = ({
         ワクワクするようなObjectiveを作成してOKRを始めましょう！
       </span>
       <ObjectiveCreateModal>
-        <ObjectiveCreateForm createdById={createdById} />
+        <ObjectiveCreateForm okrTermId={okrTermId} createdById={createdById} />
       </ObjectiveCreateModal>
     </div>
   );

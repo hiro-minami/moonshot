@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { api } from "~/trpc/react";
 
-export const useObjectiveForm = (createdById: string) => {
+export const useObjectiveForm = (okrTermId: number, createdById: string) => {
   const router = useRouter();
 
   const formSchema = z.object({
@@ -23,8 +23,6 @@ export const useObjectiveForm = (createdById: string) => {
     resolver: zodResolver(formSchema),
   });
 
-  const currentOkrTerm = api.okrTerm.getCurrentOkrTerm.useQuery();
-
   const createObjective = api.objective.createObjective.useMutation({
     onSuccess: () => {
       router.refresh();
@@ -32,13 +30,11 @@ export const useObjectiveForm = (createdById: string) => {
   });
 
   const onSubmit: SubmitHandler<FormSchema> = (data) => {
-    if (!currentOkrTerm.data) throw new Error("No current OKR term");
-
     createObjective.mutate({
       name: data.name,
       createdById,
       description: data.description,
-      okrTermId: currentOkrTerm.data.id,
+      okrTermId,
     });
   };
 

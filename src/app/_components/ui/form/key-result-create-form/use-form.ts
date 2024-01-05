@@ -5,7 +5,11 @@ import { useFieldArray, useForm } from "react-hook-form";
 import { z } from "zod";
 import { api } from "~/trpc/react";
 
-export const useKeyResultForm = (createdById: string, objectiveId: number) => {
+export const useKeyResultForm = (
+  okrTermId: number,
+  createdById: string,
+  objectiveId: number,
+) => {
   const router = useRouter();
 
   const formSchema = z.object({
@@ -37,8 +41,6 @@ export const useKeyResultForm = (createdById: string, objectiveId: number) => {
     name: "keyResults",
   });
 
-  const currentOkrTerm = api.okrTerm.getCurrentOkrTerm.useQuery();
-
   const createKeyResults = api.keyResult.createKeyResults.useMutation({
     onSuccess: () => {
       router.refresh();
@@ -46,13 +48,10 @@ export const useKeyResultForm = (createdById: string, objectiveId: number) => {
   });
 
   const onSubmit: SubmitHandler<FormSchema> = (data) => {
-    if (!currentOkrTerm.data) throw new Error("No current OKR term");
-    console.log(data);
-
     const keyResultsData = data.keyResults.map((kr) => ({
       name: kr.name,
       createdById,
-      okrTermId: currentOkrTerm.data!.id,
+      okrTermId,
       objectiveId,
       targetValue: Number(kr.targetValue),
       unit: kr.unit,

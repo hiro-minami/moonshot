@@ -4,17 +4,19 @@ import { KeyResultCreateModalFooter } from "../../modal/key-result-crate-modal";
 import { useKeyResultForm } from "./use-form";
 
 type KeyResultCreateFormProps = {
+  okrTermId: number;
   createdById: string;
   objectiveId: number;
 };
 
 // TODO: バリデーションの追加
 export const KeyResultCreateForm = ({
+  okrTermId,
   createdById,
   objectiveId,
 }: KeyResultCreateFormProps) => {
   const { onSubmit, errors, handleSubmit, register, fields, append, remove } =
-    useKeyResultForm(createdById, objectiveId);
+    useKeyResultForm(okrTermId, createdById, objectiveId);
 
   console.log(errors);
 

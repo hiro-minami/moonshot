@@ -20,7 +20,12 @@ const Okr = async ({ params }: { params: { "okr-term-id": string } }) => {
   });
 
   if (!objective)
-    return <PleaseOkrCreateContent createdById={session.user.id} />;
+    return (
+      <PleaseOkrCreateContent
+        okrTermId={okrTerm.id}
+        createdById={session.user.id}
+      />
+    );
 
   const keyResultsQuery = await api.keyResult.getKeyResults.query({
     createdById: session.user.id,
@@ -30,8 +35,9 @@ const Okr = async ({ params }: { params: { "okr-term-id": string } }) => {
   const keyResults = keyResultsQuery.sort((a, b) => a.id - b.id);
 
   return (
-    <div className="px-12 py-[35px]">
+    <div className="px-8 py-[35px]">
       <PageContent
+        okrTermId={okrTerm.id}
         objective={objective}
         keyResults={keyResults}
         createdById={session.user.id}
