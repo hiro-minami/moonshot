@@ -37,6 +37,9 @@ export const DueDatePicker = ({ taskId }: DueDatePickerProps) => {
           mode="single"
           onSelect={closePopper}
           className="z-100 bg-white"
+          classNames={{
+            day_today: "rounded-full bg-gray-200 text-gray-900",
+          }}
         />
       </Popover.Content>
     </Popover.Root>
