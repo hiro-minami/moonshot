@@ -2,6 +2,7 @@
 
 import { RocketLaunch, Trash } from "@phosphor-icons/react";
 import type { Objective } from "@prisma/client";
+import * as Progress from "@radix-ui/react-progress";
 import { Card, Tooltip } from "@radix-ui/themes";
 import { useRouter } from "next/navigation";
 import { useCallback, useMemo } from "react";
@@ -46,12 +47,18 @@ export const ObjectiveCard = ({
             </Tooltip>
           </div>
           <Tooltip content={`${progress}%`} delayDuration={100}>
-            <div className="h-2.5 w-[100px] rounded-full  bg-gray-200">
-              <div
-                className="h-full rounded-full bg-[#9f53ec]"
-                style={{ width: `${progress}%` }}
+            <Progress.Root
+              className="relative bg-gray-200 overflow-hidden rounded-full w-[100px] h-2.5"
+              style={{
+                transform: "translateZ(0)",
+              }}
+              value={progress}
+            >
+              <Progress.Indicator
+                className="bg-[#9f53ec] w-full h-full transition-transform duration-[660ms] ease-[cubic-bezier(0.65, 0, 0.35, 1)]"
+                style={{ transform: `translateX(-${100 - progress}%)` }}
               />
-            </div>
+            </Progress.Root>
           </Tooltip>
         </div>
 
