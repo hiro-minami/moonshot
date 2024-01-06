@@ -14,11 +14,11 @@ export const OkrTermUpdateForm = ({ okrTerm }: OkrTermUpdateFormProps) => {
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-1">
           <label className="text-sm" htmlFor="name">
-            期間名
+            目標名
           </label>
           <input
             className="h-[30px] w-[100%] border-b-2 outline-0 focus-within:border-[#9f53ec]"
-            placeholder="OKR期間1"
+            placeholder="例：最強のエンジニアになる"
             id="name"
             {...register("name")}
           />
