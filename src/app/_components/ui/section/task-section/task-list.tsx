@@ -18,7 +18,7 @@ export const TaskList = ({ keyResults, onClick }: TaskListProps) => {
       style={{ height: height }}
     >
       {keyResults.map((keyResult) => (
-        <div key={keyResult.id} className="pb-4 flex flex-col gap-2">
+        <div key={keyResult.id} className="flex flex-col gap-3 pb-[48px]">
           <span className="font-bold">{keyResult.name}</span>
           <div className="flex flex-col gap-2">
             {keyResult.tasks.map((task) => (
