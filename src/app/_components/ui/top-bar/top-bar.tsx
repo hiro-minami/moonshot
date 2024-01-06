@@ -1,6 +1,6 @@
 "use client";
 
-import { FlagCheckered, TrendUp, UserCircleGear } from "@phosphor-icons/react";
+import { TrendUp, UserCircleGear } from "@phosphor-icons/react";
 import { Button, DropdownMenu, Tooltip } from "@radix-ui/themes";
 
 import Link from "next/link";
@@ -8,10 +8,12 @@ import Link from "next/link";
 export const TopBar = () => {
   return (
     <div className="flex justify-between items-center px-12 py-[12px] bg-[#9f53ec]">
-      <div className="flex items-center gap-2">
-        <FlagCheckered color="#fffafa" size={32} weight="fill" />
-        <span className="text-2xl font-bold text-[#fffafa]">Itadaki</span>
-      </div>
+      <span
+        className="text-3xl font-bold text-[#fffafa]"
+        style={{ fontFamily: "Snell Roundhand" }}
+      >
+        LunaQuest
+      </span>
       <div className="flex flex-row gap-4 items-center">
         <DropdownMenu.Root>
           <DropdownMenu.Trigger>
