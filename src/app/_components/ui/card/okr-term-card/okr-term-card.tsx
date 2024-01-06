@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import { api } from "~/trpc/react";
 import { OkrTermUpdateForm } from "../../form/okr-term-update-form";
-import { OkrTermDeleteAlertModal } from "../../modal/alert-modal/okr-term-delete-alert-modal/okr-term-delete-alert-modal";
+import { OkrTermDeleteAlertModal } from "../../modal/alert-modal/okr-term-delete-alert-modal";
 import { OkrTermUpdateModal } from "../../modal/okr-term-update-modal";
 
 type OkrTermCardProps = {
