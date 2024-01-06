@@ -12,10 +12,12 @@ type Props = {
 };
 
 export const PageContent = ({ okrTerms, createdById }: Props) => {
+  const height = Math.floor(window.innerHeight * 0.655);
+
   return (
     <>
       <div className="align-center flex justify-between">
-        <span className="ml-6 text-[32px] font-bold">OKR期間</span>
+        <span className="ml-6 text-[32px] font-bold">達成したい目標</span>
         <OkrTermCreateModal>
           <OkrTermCreateForm createdById={createdById} />
         </OkrTermCreateModal>
@@ -23,7 +25,8 @@ export const PageContent = ({ okrTerms, createdById }: Props) => {
       <ScrollArea
         type="always"
         scrollbars="vertical"
-        className="mt-8 h-[560px] px-6"
+        className="mt-8 px-6"
+        style={{ height }}
       >
         {okrTerms.length > 0 ? (
           <div className="flex flex-col gap-4 pt-4">
