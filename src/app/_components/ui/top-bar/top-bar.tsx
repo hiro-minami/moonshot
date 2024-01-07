@@ -2,17 +2,20 @@
 
 import { TrendUp, UserCircleGear } from "@phosphor-icons/react";
 import { Button, DropdownMenu, Tooltip } from "@radix-ui/themes";
+import { Exo_2 } from "next/font/google";
 
 import Link from "next/link";
+
+const exo_2 = Exo_2({
+  weight: "500",
+  subsets: ["latin"],
+});
 
 export const TopBar = () => {
   return (
     <div className="flex justify-between items-center px-12 py-[12px] bg-[#9f53ec]">
-      <span
-        className="text-3xl font-bold text-[#fffafa]"
-        style={{ fontFamily: "Snell Roundhand" }}
-      >
-        LunaQuest
+      <span className="text-3xl text-[#fffafa]" style={exo_2.style}>
+        LunaTrek
       </span>
       <div className="flex flex-row gap-4 items-center">
         <DropdownMenu.Root>

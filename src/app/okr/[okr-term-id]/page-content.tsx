@@ -28,7 +28,7 @@ export const PageContent = ({
     keyResultprogressRateList.reduce((a, b) => a + b, 0) /
       keyResultprogressRateList.length,
   );
-  console.log("keyResultprogressRateList", keyResultprogressRateList);
+
   return (
     <div className="grid grid-cols-3 gap-8">
       <OkrSection
