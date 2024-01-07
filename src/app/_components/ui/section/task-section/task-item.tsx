@@ -26,7 +26,7 @@ export const TaskItem = ({
     >
       <div className="flex flex-row gap-2 items-center">
         {!readonly && (
-          <Tooltip content="削除する" delayDuration={100}>
+          <Tooltip content="タスクを完了にする" delayDuration={100}>
             <CheckCircle
               size={20}
               onClick={() => onClick(task.id)}
@@ -39,7 +39,7 @@ export const TaskItem = ({
       {!readonly && (
         <>
           {task.dueDate ? (
-            <span className="text-sm " style={{ color: fontColor }}>
+            <span className="text-sm" style={{ color: fontColor }}>
               {task.dueDate.toLocaleDateString()}
             </span>
           ) : (
