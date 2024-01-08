@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { useToast } from "~/app/_components/toast";
 import { api } from "~/trpc/react";
 
 type UseKeyResultUpdateFormProps = {
@@ -14,6 +15,7 @@ export const useKeyResultUpdateForm = ({
   keyResult,
 }: UseKeyResultUpdateFormProps) => {
   const router = useRouter();
+  const openToast = useToast();
 
   const formSchema = z.object({
     name: z.string().min(1, { message: "Name is required" }),
@@ -40,7 +42,17 @@ export const useKeyResultUpdateForm = ({
 
   const updateKeyResult = api.keyResult.updateKeyResult.useMutation({
     onSuccess: () => {
+      openToast({
+        type: "success",
+        title: `KeyResultを更新しました`,
+      });
       router.refresh();
+    },
+    onError: (error) => {
+      openToast({
+        type: "error",
+        title: `KeyResultの更新に失敗しました。${error.message}`,
+      });
     },
   });
 

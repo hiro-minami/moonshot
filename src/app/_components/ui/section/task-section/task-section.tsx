@@ -4,6 +4,7 @@ import type { Objective } from "@prisma/client";
 
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
+import { useToast } from "~/app/_components/toast";
 import { api } from "~/trpc/react";
 import type { KeyResultWithTasks } from "~/types";
 import { TaskList } from "./task-list";
@@ -17,10 +18,21 @@ type TaskSectionProps = {
 
 export const TaskSection = ({ keyResults }: TaskSectionProps) => {
   const router = useRouter();
+  const openToast = useToast();
 
   const { mutate } = api.task.finishTask.useMutation({
     onSuccess: () => {
+      openToast({
+        type: "success",
+        title: `タスクを完了しました`,
+      });
       router.refresh();
+    },
+    onError: (error) => {
+      openToast({
+        type: "error",
+        title: `タスクを完了できませんでした。${error.message}`,
+      });
     },
   });
 

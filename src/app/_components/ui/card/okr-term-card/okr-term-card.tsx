@@ -5,6 +5,7 @@ import Picker from "emoji-picker-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
+import { useToast } from "~/app/_components/toast";
 import { api } from "~/trpc/react";
 import { OkrTermUpdateForm } from "../../form/okr-term-update-form";
 import { OkrTermDeleteAlertModal } from "../../modal/alert-modal/okr-term-delete-alert-modal";
@@ -16,11 +17,22 @@ type OkrTermCardProps = {
 
 export const OkrTermCard = ({ okrTerm }: OkrTermCardProps) => {
   const router = useRouter();
+  const openToast = useToast();
   const formatDate = (date: Date) => date.toISOString().split("T")[0];
 
   const { mutate: deleteOkrTerm } = api.okrTerm.deleteOkrTerm.useMutation({
     onSuccess: () => {
+      openToast({
+        type: "success",
+        title: "OKR期間を削除しました",
+      });
       router.refresh();
+    },
+    onError: (error) => {
+      openToast({
+        type: "error",
+        title: `OKR期間の削除に失敗しました ${error.message}`,
+      });
     },
   });
 
@@ -30,7 +42,17 @@ export const OkrTermCard = ({ okrTerm }: OkrTermCardProps) => {
 
   const { mutate: updateEmoji } = api.okrTerm.updateEmoji.useMutation({
     onSuccess: () => {
+      openToast({
+        type: "success",
+        title: "絵文字を更新しました",
+      });
       router.refresh();
+    },
+    onError: (error) => {
+      openToast({
+        type: "error",
+        title: `絵文字の更新に失敗しました ${error.message}`,
+      });
     },
   });
 

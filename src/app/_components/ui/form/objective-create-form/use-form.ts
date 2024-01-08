@@ -3,10 +3,12 @@ import { useRouter } from "next/navigation";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { useToast } from "~/app/_components/toast";
 import { api } from "~/trpc/react";
 
 export const useObjectiveForm = (okrTermId: number, createdById: string) => {
   const router = useRouter();
+  const openToast = useToast();
 
   const formSchema = z.object({
     name: z.string().min(1, { message: "Name is required" }),
@@ -25,7 +27,17 @@ export const useObjectiveForm = (okrTermId: number, createdById: string) => {
 
   const createObjective = api.objective.createObjective.useMutation({
     onSuccess: () => {
+      openToast({
+        type: "success",
+        title: `Objectiveを作成しました`,
+      });
       router.refresh();
+    },
+    onError: (error) => {
+      openToast({
+        type: "error",
+        title: `Objectiveの作成に失敗しました。${error.message}`,
+      });
     },
   });
 

@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import type { SubmitHandler } from "react-hook-form";
 import { useFieldArray, useForm } from "react-hook-form";
 import { z } from "zod";
+import { useToast } from "~/app/_components/toast";
 import { api } from "~/trpc/react";
 
 export const useKeyResultForm = (
@@ -11,6 +12,7 @@ export const useKeyResultForm = (
   objectiveId: number,
 ) => {
   const router = useRouter();
+  const openToast = useToast();
 
   const formSchema = z.object({
     keyResults: z.array(
@@ -43,7 +45,17 @@ export const useKeyResultForm = (
 
   const createKeyResults = api.keyResult.createKeyResults.useMutation({
     onSuccess: () => {
+      openToast({
+        type: "success",
+        title: `KeyResultを作成しました`,
+      });
       router.refresh();
+    },
+    onError: (error) => {
+      openToast({
+        type: "error",
+        title: `KeyResultの作成に失敗しました。${error.message}`,
+      });
     },
   });
 

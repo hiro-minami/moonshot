@@ -6,6 +6,7 @@ import * as Progress from "@radix-ui/react-progress";
 import { Card, Tooltip } from "@radix-ui/themes";
 import { useRouter } from "next/navigation";
 import { useCallback, useMemo } from "react";
+import { useToast } from "~/app/_components/toast";
 import { api } from "~/trpc/react";
 import { ObjectiveUpdateForm } from "../../form/objective-update-form";
 import { ObjectiveUpdateModal } from "../../modal/objective-update-modal";
@@ -20,11 +21,22 @@ export const ObjectiveCard = ({
   progressRate,
 }: ObjectiveCardProps) => {
   const router = useRouter();
+  const openToast = useToast();
   const width = useMemo<number>(() => Math.round(window.innerWidth * 0.21), []);
 
   const { mutate } = api.objective.deleteObjective.useMutation({
     onSuccess: () => {
+      openToast({
+        type: "success",
+        title: "Objectiveを削除しました",
+      });
       router.refresh();
+    },
+    onError: (error) => {
+      openToast({
+        type: "error",
+        title: `Objectiveの削除に失敗しました ${error.message}`,
+      });
     },
   });
 
