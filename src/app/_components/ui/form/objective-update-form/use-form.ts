@@ -4,10 +4,12 @@ import { useRouter } from "next/navigation";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { useToast } from "~/app/_components/toast";
 import { api } from "~/trpc/react";
 
 export const useObjectiveUpdateForm = (objective: Objective) => {
   const router = useRouter();
+  const openToast = useToast();
 
   const formSchema = z.object({
     name: z.string().min(1, { message: "Name is required" }),
@@ -30,7 +32,17 @@ export const useObjectiveUpdateForm = (objective: Objective) => {
 
   const updateObjective = api.objective.updateObjective.useMutation({
     onSuccess: () => {
+      openToast({
+        type: "success",
+        title: `Objectiveを更新しました`,
+      });
       router.refresh();
+    },
+    onError: (error) => {
+      openToast({
+        type: "error",
+        title: `Objectiveの更新に失敗しました。${error.message}`,
+      });
     },
   });
 

@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import type { SubmitHandler } from "react-hook-form";
 import { useFieldArray, useForm } from "react-hook-form";
 import { z } from "zod";
+import { useToast } from "~/app/_components/toast";
 import { api } from "~/trpc/react";
 
 type UseCheckinFormProps = {
@@ -12,6 +13,7 @@ type UseCheckinFormProps = {
 
 export const useCheckinForm = ({ keyResults }: UseCheckinFormProps) => {
   const router = useRouter();
+  const openToast = useToast();
 
   const formSchema = z.object({
     keyResults: z.array(
@@ -46,7 +48,17 @@ export const useCheckinForm = ({ keyResults }: UseCheckinFormProps) => {
 
   const checkin = api.keyResult.checkin.useMutation({
     onSuccess: () => {
+      openToast({
+        type: "success",
+        title: `チェックインに成功しました`,
+      });
       router.refresh();
+    },
+    onError: (error) => {
+      openToast({
+        type: "error",
+        title: `チェックインに失敗しました。${error.message}`,
+      });
     },
   });
 

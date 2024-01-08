@@ -6,6 +6,7 @@ import { api } from "~/trpc/react";
 
 import { ChartBar, Target, Trash } from "@phosphor-icons/react";
 import Link from "next/link";
+import { useToast } from "~/app/_components/toast";
 import { KeyResultUpdateForm } from "../../form/key-result-update-form";
 import { KeyResultUpdateModal } from "../../modal/key-result-update-modal";
 import { KeyResultName } from "./key-result-name";
@@ -24,10 +25,21 @@ export const KeyResultCard = ({
 }: KeyResultCardProps) => {
   const router = useRouter();
   const pathname = usePathname();
+  const openToast = useToast();
 
   const { mutate } = api.keyResult.deleteKeyResult.useMutation({
     onSuccess: () => {
+      openToast({
+        type: "success",
+        title: "KeyResultを削除しました",
+      });
       router.refresh();
+    },
+    onError: (error) => {
+      openToast({
+        type: "error",
+        title: `KeyResultの削除に失敗しました ${error.message}`,
+      });
     },
   });
 
