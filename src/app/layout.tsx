@@ -18,7 +18,7 @@ const inter = Inter({
 export const metadata = {
   title: "LunaTrek",
   description: "Okrs for everyone",
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
+  icons: [{ rel: "icon", url: "/star-and-crescent-bold.svg" }],
 };
 
 export default function RootLayout({
