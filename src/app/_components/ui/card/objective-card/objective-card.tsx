@@ -1,6 +1,6 @@
 "use client";
 
-import { RocketLaunch, Trash } from "@phosphor-icons/react";
+import { RocketLaunch } from "@phosphor-icons/react";
 import type { Objective } from "@prisma/client";
 import * as Progress from "@radix-ui/react-progress";
 import { Card, Tooltip } from "@radix-ui/themes";
@@ -9,6 +9,7 @@ import { useCallback, useMemo } from "react";
 import { useToast } from "~/app/_components/toast";
 import { api } from "~/trpc/react";
 import { ObjectiveUpdateForm } from "../../form/objective-update-form";
+import { ObjectiveDeleteAlertModal } from "../../modal/alert-modal/objective-delete-alert-modal";
 import { ObjectiveUpdateModal } from "../../modal/objective-update-modal";
 
 type ObjectiveCardProps = {
@@ -78,14 +79,7 @@ export const ObjectiveCard = ({
           <ObjectiveUpdateModal>
             <ObjectiveUpdateForm objective={objective} />
           </ObjectiveUpdateModal>
-
-          <Tooltip content="削除する" delayDuration={100}>
-            <Trash
-              size={20}
-              className="cursor-pointer text-[#9CA3AF] hover:text-[#9f53ec]"
-              onClick={deleteObjective}
-            />
-          </Tooltip>
+          <ObjectiveDeleteAlertModal onClick={deleteObjective} />
         </div>
       </div>
     </Card>
