@@ -4,10 +4,11 @@ import { usePathname, useRouter } from "next/navigation";
 import { useCallback } from "react";
 import { api } from "~/trpc/react";
 
-import { ChartBar, Target, Trash } from "@phosphor-icons/react";
+import { ChartBar, Target } from "@phosphor-icons/react";
 import Link from "next/link";
 import { useToast } from "~/app/_components/toast";
 import { KeyResultUpdateForm } from "../../form/key-result-update-form";
+import { KeyResultDeleteAlertModal } from "../../modal/alert-modal/key-result-delete-alert-modal";
 import { KeyResultUpdateModal } from "../../modal/key-result-update-modal";
 import { KeyResultName } from "./key-result-name";
 import { KeyResultProgressRate } from "./key-result-progress-rate";
@@ -76,14 +77,7 @@ export const KeyResultCard = ({
           <KeyResultUpdateModal>
             <KeyResultUpdateForm keyResult={keyResult} />
           </KeyResultUpdateModal>
-
-          <Tooltip content="削除する" delayDuration={100}>
-            <Trash
-              size={20}
-              className="cursor-pointer text-[#9CA3AF] hover:text-[#9f53ec]"
-              onClick={deleteKeyResult}
-            />
-          </Tooltip>
+          <KeyResultDeleteAlertModal onClick={deleteKeyResult} />
         </div>
       )}
     </Card>
