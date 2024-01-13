@@ -1,7 +1,7 @@
 "use client";
 
 import type { OkrTerm } from "@prisma/client";
-import { ScrollArea } from "@radix-ui/themes";
+import { Grid, ScrollArea } from "@radix-ui/themes";
 import { OkrTermCard } from "../_components/ui/card/okr-term-card";
 import { OkrTermCreateForm } from "../_components/ui/form/okr-term-create-form";
 import { OkrTermCreateModal } from "../_components/ui/modal/okr-term-create-modal";
@@ -29,11 +29,11 @@ export const PageContent = ({ okrTerms, createdById }: Props) => {
         style={{ height }}
       >
         {okrTerms.length > 0 ? (
-          <div className="flex flex-col gap-4 pt-4">
+          <Grid columns="3" gap="4" width="auto" className="px-6">
             {okrTerms.map((okrTerm) => (
               <OkrTermCard key={okrTerm.id} okrTerm={okrTerm} />
             ))}
-          </div>
+          </Grid>
         ) : (
           <div className="flex flex-col gap-4 pt-4">no Okr Terms</div>
         )}

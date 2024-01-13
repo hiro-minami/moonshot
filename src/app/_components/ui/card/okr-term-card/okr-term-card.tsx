@@ -1,6 +1,6 @@
 "use client";
 import type { OkrTerm } from "@prisma/client";
-import { Box, Card, Popover, Text } from "@radix-ui/themes";
+import { Card, Inset, Popover, Text } from "@radix-ui/themes";
 import Picker from "emoji-picker-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -64,9 +64,9 @@ export const OkrTermCard = ({ okrTerm }: OkrTermCardProps) => {
   );
 
   return (
-    <Card className="w-[100%]">
-      <div className="flex flex-row items-center justify-between">
-        <div className="flex flex-row items-center gap-[16px] pl-2">
+    <Card size="2">
+      <Inset clip="padding-box" side="top" className="bg-[#9f53ec]/50">
+        <div className="flex flex-row items-center justify-center p-6">
           <Popover.Root>
             <Popover.Trigger>
               <Text as="div" size="8" weight="bold" className="cursor-pointer">
@@ -83,23 +83,23 @@ export const OkrTermCard = ({ okrTerm }: OkrTermCardProps) => {
               />
             </Popover.Content>
           </Popover.Root>
-          <Box>
-            <Link href={`/okr/${btoa(`OkrTermId:${okrTerm.id}`)}`}>
-              <Text
-                as="div"
-                size="2"
-                weight="bold"
-                className="hover:text-[#9f53ec]"
-              >
-                {okrTerm.name}
-              </Text>
-            </Link>
-            <Text as="div" size="2" weight="bold">
-              {formatDate(okrTerm.startDate)} ~ {formatDate(okrTerm.endDate)}
-            </Text>
-          </Box>
         </div>
-        <div className="flex flex-row gap-2 justify-end">
+      </Inset>
+      <div className="flex flex-col gap-2 pt-2">
+        <Link href={`/okr/${btoa(`OkrTermId:${okrTerm.id}`)}`}>
+          <Text
+            as="div"
+            size="2"
+            weight="bold"
+            className="hover:text-[#9f53ec]"
+          >
+            {okrTerm.name}
+          </Text>
+        </Link>
+        <div className="flex flex-row gap-2 justify-start items-center">
+          <Text as="div" size="1" weight="regular" className="text-[#9CA3AF]">
+            {formatDate(okrTerm.startDate)} ~ {formatDate(okrTerm.endDate)}
+          </Text>
           <OkrTermUpdateModal>
             <OkrTermUpdateForm okrTerm={okrTerm} />
           </OkrTermUpdateModal>
