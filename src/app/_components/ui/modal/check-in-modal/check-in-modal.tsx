@@ -18,7 +18,7 @@ export const CheckinModal = ({ children, keyResults }: CheckinModalProps) => {
           children
         ) : (
           <Button className="bg-[#9f53ec] p-5 hover:bg-[#9f53ec]/80">
-            <span className="font-bold">チェックイン</span>
+            <span className="font-bold">進捗を一括で更新する</span>
           </Button>
         )}
       </Dialog.Trigger>
