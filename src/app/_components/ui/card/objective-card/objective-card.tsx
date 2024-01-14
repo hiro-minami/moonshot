@@ -59,7 +59,7 @@ export const ObjectiveCard = ({
               </p>
             </Tooltip>
           </div>
-          <Tooltip content={`${progress}%`} delayDuration={100}>
+          <Tooltip content={`進捗：${progress}%`} delayDuration={100}>
             <Progress.Root
               className="relative bg-gray-200 overflow-hidden rounded-full w-[100px] h-2.5"
               style={{
