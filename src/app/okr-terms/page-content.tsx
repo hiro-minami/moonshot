@@ -29,7 +29,7 @@ export const PageContent = ({ okrTerms, createdById }: Props) => {
         style={{ height }}
       >
         {okrTerms.length > 0 ? (
-          <Grid columns="3" gap="4" width="auto" className="px-6">
+          <Grid columns="4" gap="4" width="auto">
             {okrTerms.map((okrTerm) => (
               <OkrTermCard key={okrTerm.id} okrTerm={okrTerm} />
             ))}
