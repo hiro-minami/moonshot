@@ -4,11 +4,12 @@ import { usePathname, useRouter } from "next/navigation";
 import { useCallback } from "react";
 import { api } from "~/trpc/react";
 
-import { ChartBar, Target } from "@phosphor-icons/react";
+import { ArrowsClockwise, ChartBar, Target } from "@phosphor-icons/react";
 import Link from "next/link";
 import { useToast } from "~/app/_components/toast";
 import { KeyResultUpdateForm } from "../../form/key-result-update-form";
 import { KeyResultDeleteAlertModal } from "../../modal/alert-modal/key-result-delete-alert-modal";
+import { CheckinModal } from "../../modal/check-in-modal";
 import { KeyResultUpdateModal } from "../../modal/key-result-update-modal";
 import { KeyResultName } from "./key-result-name";
 import { KeyResultProgressRate } from "./key-result-progress-rate";
@@ -57,10 +58,16 @@ export const KeyResultCard = ({
             <KeyResultName name={keyResult.name} readonly={readonly} />
           </Box>
         </div>
-        <KeyResultProgressRate {...{ keyResult, progressRate, readonly }} />
+        <KeyResultProgressRate progressRate={progressRate} />
       </div>
       {!readonly && (
         <div className="flex flex-row gap-2 justify-end pt-2">
+          <CheckinModal keyResults={[keyResult]}>
+            <ArrowsClockwise
+              size={20}
+              className="cursor-pointer text-[#9CA3AF] hover:text-[#9f53ec]"
+            />
+          </CheckinModal>
           <Tooltip content="ダッシュボードを見る" delayDuration={100}>
             <Link
               href={`${pathname}/key-result/${btoa(
