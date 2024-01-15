@@ -64,7 +64,7 @@ export const OkrTermCard = ({ okrTerm }: OkrTermCardProps) => {
   );
 
   return (
-    <Card size="2">
+    <Card size="2" className="w-[280px]">
       <Inset clip="padding-box" side="top" className="bg-[#9f53ec]/50">
         <div className="flex flex-row items-center justify-center p-6">
           <Popover.Root>
@@ -96,14 +96,16 @@ export const OkrTermCard = ({ okrTerm }: OkrTermCardProps) => {
             {okrTerm.name}
           </Text>
         </Link>
-        <div className="flex flex-row gap-2 justify-start items-center">
+        <div className="flex flex-row justify-between items-center">
           <Text as="div" size="1" weight="regular" className="text-[#9CA3AF]">
-            {formatDate(okrTerm.startDate)} ~ {formatDate(okrTerm.endDate)}
+            {formatDate(okrTerm.startDate)} 〜 {formatDate(okrTerm.endDate)}
           </Text>
-          <OkrTermUpdateModal>
-            <OkrTermUpdateForm okrTerm={okrTerm} />
-          </OkrTermUpdateModal>
-          <OkrTermDeleteAlertModal onClick={handleDeleteOkrTerm} />
+          <div className="flex flex-row gap-2 justify-end">
+            <OkrTermUpdateModal>
+              <OkrTermUpdateForm okrTerm={okrTerm} />
+            </OkrTermUpdateModal>
+            <OkrTermDeleteAlertModal onClick={handleDeleteOkrTerm} />
+          </div>
         </div>
       </div>
     </Card>

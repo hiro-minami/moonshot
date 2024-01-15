@@ -1,6 +1,6 @@
 "use client";
 
-import { RocketLaunch } from "@phosphor-icons/react";
+import { Rocket } from "@phosphor-icons/react";
 import type { Objective } from "@prisma/client";
 import * as Progress from "@radix-ui/react-progress";
 import { Card, Tooltip } from "@radix-ui/themes";
@@ -52,7 +52,7 @@ export const ObjectiveCard = ({
       <div className="flex flex-col gap-2">
         <div className="flex flex-row items-center justify-between">
           <div className="flex flex-row items-center gap-2">
-            <RocketLaunch size={20} />
+            <Rocket size={20} />
             <Tooltip content={objective.name} delayDuration={100}>
               <p className="font-bold text-sm truncate ..." style={{ width }}>
                 {objective.name}

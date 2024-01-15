@@ -10,7 +10,7 @@ export const CheckinModalFooter = () => {
       </Dialog.Close>
       <Dialog.Close>
         <Button type="submit" className="bg-[#9f53ec] hover:bg-[#9f53ec]/80">
-          チェックイン
+          更新する
         </Button>
       </Dialog.Close>
     </div>
