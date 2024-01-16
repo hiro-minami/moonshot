@@ -19,7 +19,7 @@ export const TopSection = ({
 }: TopSectionProps) => {
   return (
     <div className="align-center flex justify-between">
-      <span className="text-[32px] font-bold">OKR</span>
+      <span className="text-[32px] font-bold">目標</span>
       {keyResults.length > 0 ? (
         <CheckinModal keyResults={keyResults} />
       ) : (

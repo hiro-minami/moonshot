@@ -28,7 +28,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`bg-[#fffafa] font-sans ${inter.variable}`}>
+      <body className={`bg-[#F6F7F8] font-sans ${inter.variable}`}>
         <Theme>
           <ToastProvider>
             <TRPCReactProvider cookies={cookies().toString()}>

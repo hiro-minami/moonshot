@@ -20,8 +20,8 @@ export const KeyResultDeleteAlertModal = ({
       <AlertDialog.Content style={{ maxWidth: 450 }}>
         <AlertDialog.Title>KeyResultを削除する</AlertDialog.Title>
         <AlertDialog.Description size="3">
-          本当に削除しますか？削除した場合、復元することはできません。
-          また、削除した期間に紐づくタスクも削除されます。
+          <p>本当に削除しますか？削除した場合、復元することはできません。</p>
+          <p>また、削除した期間に紐づくタスクも削除されます。</p>
         </AlertDialog.Description>
 
         <div className="flex flex-row gap-4 items-center justify-end pt-4">
