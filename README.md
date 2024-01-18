@@ -10,7 +10,7 @@
 - TypeScript
 - Tailwind CSS
 - React
-- Radixui
+- shadcn
 
 ### バックエンド
 - Next.js
