@@ -25,7 +25,7 @@ erDiagram
     }
   
 
-  "users" {
+  "User" {
     String id "🗝️"
     String name "❓"
     String email "❓"
@@ -34,14 +34,14 @@ erDiagram
     }
   
 
-  "verification_tokens" {
+  "VerificationToken" {
     String identifier 
     String token 
     DateTime expires 
     }
   
 
-  "dreams" {
+  "OkrTerm" {
     Int id "🗝️"
     String name 
     String emoji "❓"
@@ -51,11 +51,20 @@ erDiagram
     }
   
 
-  "numerical_goals" {
+  "Objective" {
+    Int id "🗝️"
+    String name 
+    String description 
+    String createdById 
+    Int okrTermId 
+    }
+  
+
+  "KeyResult" {
     Int id "🗝️"
     String name 
     Int okrTermId 
-    Int dreamId 
+    Int objectiveId 
     String createdById 
     Int targetValue 
     String unit 
@@ -63,26 +72,32 @@ erDiagram
     }
   
 
-  "tasks" {
+  "Task" {
     Int id "🗝️"
     String name 
-    Int numericalGoalId 
+    Int keyResultId 
     Boolean isDone 
     DateTime startDate 
     DateTime endDate "❓"
     DateTime dueDate "❓"
     }
   
-    "Account" o|--|| "users" : "user"
-    "Session" o|--|| "users" : "user"
-    "users" o{--}o "Account" : "accounts"
-    "users" o{--}o "Session" : "sessions"
-    "users" o{--}o "dreams" : "createdDreams"
-    "users" o{--}o "numerical_goals" : "createdNumericalGoals"
-    "dreams" o|--|| "users" : "createdBy"
-    "dreams" o{--}o "numerical_goals" : "numericalGoals"
-    "numerical_goals" o|--|| "dreams" : "dream"
-    "numerical_goals" o|--|| "users" : "createdBy"
-    "numerical_goals" o{--}o "tasks" : "tasks"
-    "tasks" o|--|| "numerical_goals" : "numericalGoal"
+    "Account" o|--|| "User" : "user"
+    "Session" o|--|| "User" : "user"
+    "User" o{--}o "Account" : "accounts"
+    "User" o{--}o "Session" : "sessions"
+    "User" o{--}o "OkrTerm" : "createdOkrTerms"
+    "User" o{--}o "Objective" : "createdObjectives"
+    "User" o{--}o "KeyResult" : "createdKeyResults"
+    "OkrTerm" o|--|| "User" : "createdBy"
+    "OkrTerm" o{--}o "Objective" : "objectives"
+    "OkrTerm" o{--}o "KeyResult" : "keyResults"
+    "Objective" o|--|| "User" : "createdBy"
+    "Objective" o|--|| "OkrTerm" : "okrTerm"
+    "Objective" o{--}o "KeyResult" : "keyResults"
+    "KeyResult" o|--|| "OkrTerm" : "okrTerm"
+    "KeyResult" o|--|| "Objective" : "objective"
+    "KeyResult" o|--|| "User" : "createdBy"
+    "KeyResult" o{--}o "Task" : "tasks"
+    "Task" o|--|| "KeyResult" : "keyResult"
 ```
