@@ -1,15 +1,6 @@
 ```mermaid
 erDiagram
 
-  "Post" {
-    Int id "🗝️"
-    String name 
-    DateTime createdAt 
-    DateTime updatedAt 
-    String createdById 
-    }
-  
-
   "Account" {
     String id "🗝️"
     String userId 
@@ -91,12 +82,10 @@ erDiagram
     DateTime dueDate "❓"
     }
   
-    "Post" o|--|| "User" : "createdBy"
     "Account" o|--|| "User" : "user"
     "Session" o|--|| "User" : "user"
     "User" o{--}o "Account" : "accounts"
     "User" o{--}o "Session" : "sessions"
-    "User" o{--}o "Post" : "posts"
     "User" o{--}o "OkrTerm" : "createdOkrTerms"
     "User" o{--}o "Objective" : "createdObjectives"
     "User" o{--}o "KeyResult" : "createdKeyResults"
