@@ -10,13 +10,13 @@
 - TypeScript
 - Tailwind CSS
 - React
-- shadcn
+- shadcn/ui
 
 ### バックエンド
 - Next.js
-- NextAuth
 - tRPC
 - Prisma
+- clerk
 
 ### CI/CD
 - Github Actions
@@ -31,4 +31,3 @@
   - Cloud Build
   - Cloud Run
   - Cloud SQL
-  - Cloud Strage
