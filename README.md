@@ -12,12 +12,16 @@
 - TypeScript
 - Tailwind CSS
 - React
-- shadcn/ui
+- Radix UI
 
 ### バックエンド
 - Next.js
 - tRPC
 - Prisma
 
+### インフラ
+- Vercel
+- Vercel Postgres
+
 ### CI/CD
-- Github 
+- Github
