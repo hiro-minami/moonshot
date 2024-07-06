@@ -10,25 +10,5 @@ services:
       POSTGRES_DB: itadaki
     volumes:
       - postgres-data:/var/lib/postgresql/data
-  app:
-    platform: "linux/amd64"
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args:
-        NEXT_PUBLIC_CLIENTVAR: "clientvar"
-    working_dir: /app
-    ports:
-      - "3000:3000"
-    depends_on:
-      db:
-        condition: service_healthy
-    image: t3-app
-    environment:
-      - DATABASE_URL=postgresql://postgres:password@localhost:5432/itadaki
-      - NEXTAUTH_SECRET=6v2QmFJJmMk7/cIW9faCPIvP9jNRuiFcIFAd4W1QOSs=
-      - NEXTAUTH_URL=http://localhost:3000
-      - DISCORD_CLIENT_ID=1173209987103866900
-      - DISCORD_CLIENT_SECRET=VcTENOMcUu8TSQH_UgZo4j26sx4Xj2tT
 volumes:
   postgres-data:

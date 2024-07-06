@@ -7,7 +7,7 @@ export const groupTasksByDate = (tasks: Array<Task>) => {
       if (!acc[date]) {
         acc[date] = [];
       }
-      acc[date]!.push(task);
+      acc[date]?.push(task);
       return acc;
     },
     {} as Record<string, Array<Task>>,
