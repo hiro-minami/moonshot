@@ -11,8 +11,8 @@ import { KeyResultUpdateForm } from "../../form/key-result-update-form";
 import { KeyResultDeleteAlertModal } from "../../modal/alert-modal/key-result-delete-alert-modal";
 import { CheckinModal } from "../../modal/check-in-modal";
 import { KeyResultUpdateModal } from "../../modal/key-result-update-modal";
+import { ProgressBar } from "../../progress-bar";
 import { KeyResultName } from "./key-result-name";
-import { KeyResultProgressRate } from "./key-result-progress-rate";
 
 type KeyResultCardProps = {
   keyResult: KeyResult;
@@ -58,7 +58,7 @@ export const KeyResultCard = ({
             <KeyResultName name={keyResult.name} readonly={readonly} />
           </Box>
         </div>
-        <KeyResultProgressRate progressRate={progressRate} />
+        <ProgressBar progressRate={progressRate} />
       </div>
       {!readonly && (
         <div className="flex flex-row gap-2 justify-end pt-2">

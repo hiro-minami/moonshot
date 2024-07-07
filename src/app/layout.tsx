@@ -16,7 +16,7 @@ const inter = Inter({
 });
 
 export const metadata = {
-  title: "LunaTrek",
+  title: "moonshot",
   description: "Okrs for everyone",
   icons: [{ rel: "icon", url: "/star-and-crescent-bold.svg" }],
 };
