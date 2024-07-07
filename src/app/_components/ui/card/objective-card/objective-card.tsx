@@ -2,7 +2,6 @@
 
 import { Rocket } from "@phosphor-icons/react";
 import type { Objective } from "@prisma/client";
-import * as Progress from "@radix-ui/react-progress";
 import { Card, Tooltip } from "@radix-ui/themes";
 import { useRouter } from "next/navigation";
 import { useCallback, useMemo } from "react";
@@ -11,6 +10,7 @@ import { api } from "~/trpc/react";
 import { ObjectiveUpdateForm } from "../../form/objective-update-form";
 import { ObjectiveDeleteAlertModal } from "../../modal/alert-modal/objective-delete-alert-modal";
 import { ObjectiveUpdateModal } from "../../modal/objective-update-modal";
+import { ProgressBar } from "../../progress-bar";
 
 type ObjectiveCardProps = {
   objective: Objective;
@@ -59,20 +59,7 @@ export const ObjectiveCard = ({
               </p>
             </Tooltip>
           </div>
-          <Tooltip content={`進捗：${progress}%`} delayDuration={100}>
-            <Progress.Root
-              className="relative bg-gray-200 overflow-hidden rounded-full w-[100px] h-2.5"
-              style={{
-                transform: "translateZ(0)",
-              }}
-              value={progress}
-            >
-              <Progress.Indicator
-                className="bg-[#9f53ec] w-full h-full transition-transform duration-[660ms] ease-[cubic-bezier(0.65, 0, 0.35, 1)]"
-                style={{ transform: `translateX(-${100 - progress}%)` }}
-              />
-            </Progress.Root>
-          </Tooltip>
+          <ProgressBar progressRate={progress} />
         </div>
 
         <div className="flex flex-row gap-2 justify-end">
