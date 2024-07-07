@@ -21,7 +21,7 @@ export const TopBar = () => {
       <div className="flex flex-row gap-2 items-center">
         <StarAndCrescent size={32} color="#fffafa" />
         <span className="text-2xl text-[#fffafa]" style={exo_2.style}>
-          LunaTrek
+          moonshot
         </span>
       </div>
       <div className="flex flex-row gap-4 items-center">
