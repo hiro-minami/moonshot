@@ -158,8 +158,8 @@ devDependencies:
     specifier: ^5.1.1
     version: 5.5.2
   prisma-erd-generator:
-    specifier: ^1.11.1
-    version: 1.11.1(@prisma/client@5.5.2)(typescript@5.2.2)
+    specifier: ^1.11.2
+    version: 1.11.2(@prisma/client@5.5.2)(typescript@5.2.2)
   tailwindcss:
     specifier: ^3.3.3
     version: 3.3.5
@@ -4133,8 +4133,8 @@ packages:
     resolution: {integrity: sha512-WuxUnVtlWL1OfZFQFuqvnvs6MiAGk9UNsBostyBOB0Is9wb5uRESevA6rnl/rkksXaGX3GzZhPup5d6Vp1nFew==}
     dev: false
 
-  /prisma-erd-generator@1.11.1(@prisma/client@5.5.2)(typescript@5.2.2):
-    resolution: {integrity: sha512-/NbHGnsn3emYaGJPRA/0MTzYa1RawRLKu0WOfp5pUugcyFNBwOLd38gQyhdlmkzbVSDSOp78ySNqYzt1Tq1QMQ==}
+  /prisma-erd-generator@1.11.2(@prisma/client@5.5.2)(typescript@5.2.2):
+    resolution: {integrity: sha512-abo2EBIjqJALfjm8p+uOsQk38DlU3rlLJA9/cOvcLLt8A9bjMkRwlqaZDAD/iXVZcXJRJPgJ98fEviTa+w8oTQ==}
     engines: {node: '>=14'}
     hasBin: true
     peerDependencies:
